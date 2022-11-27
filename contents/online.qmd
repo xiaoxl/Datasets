@@ -1,0 +1,110 @@
+# From online repositories
+
+## the Horse Colic Dataset
+The data is from the [UCI database](https://archive.ics.uci.edu/ml/datasets/Horse+Colic). The data is loaded as follows. `?` represents missing data.
+
+
+```{python}
+import pandas as pd
+import numpy as np
+
+url = 'http://archive.ics.uci.edu/ml/machine-learning-databases/horse-colic/horse-colic.data'
+df = pd.read_csv(url, delim_whitespace=True, header=None)
+df = df.replace("?", np.NaN)
+```
+The description of the data is listed [here](https://archive.ics.uci.edu/ml/datasets/Horse+Colic). We will preprocess the data according to the descrption.
+
+1. The data tries to predict Column 24. Since Python index starts from 0, in our case we are interested in Column 23.
+2. Column 25-27 (in our case is Column 24-26) use a special code to represent the type of lesion. For simplicity we remove these three columns.
+3. Column 28 (in our case Column 27) is of no significance so we will remove it too.
+4. Column 3 (in our case Column 2) is the IDs of Hospitals which should have very little impact so we will remove it too.
+5. We will fill the missing values with `0`.
+6. We also would like to change the label from `1` and `2` to `0` and `1` for the purpose of Logistic regression.
+
+*This part should be modified if you want to improve the performance of your model.*
+
+
+```{python}
+df.fillna(0, inplace=True)
+df.drop(columns=[2, 24, 25, 26, 27], inplace=True)
+df[23].replace({1: 1, 2: 0}, inplace=True)
+X = df.iloc[:, :-1].to_numpy().astype(float)
+y = df[23].to_numpy().astype(int)
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+```
+
+
+
+## `MNIST` dataset
+
+There are several versions of the dataset. 
+
+- `tensorflow` provides the data with the original split.
+
+
+```{python}
+import tensorflow.keras as keras
+(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()
+```
+
+
+## `titanic` dataset
+This is the famuous Kaggle101 dataset. The original data can be download from [the Kaggle page](https://www.kaggle.com/competitions/titanic/data). You may also download the {Download}`training data<./assests/datasets/titanic/train.csv>` and the {Download}`test data<./assests/datasets/titanic/test.csv>` by click the link.
+
+```{python}
+#| eval: false
+import pandas as pd
+dftrain = pd.read_csv('train.csv')
+dftest = pd.read_csv('test.csv')
+```
+
+
+
+```{python}
+#| echo: false
+import pandas as pd
+dftrain = pd.read_csv('assests/datasets/titanic/train.csv')
+dftest = pd.read_csv('assests/datasets/titanic/test.csv')
+```
+
+
+The original is a little bit messy with missing values and mix of numeric data and string data. The above code reads the data into a DataFrame. The following code does some basic of preprocess. This part should be modified if you want to improve the performance of your model.
+
+1. Only select columns: `Pclass`, `Sex`, `Age`, `SibSp`, `Parch`, `Fare`. That is to say, `Name`, `Cabin` and `Embarked` are dropped.
+2. Fill the missing values in column `Age` and `Fare` by `0`.
+3. Replace the column `Sex` by the following map: `{'male': 0, 'female': 1}`.
+
+
+```{python}
+import pandas as pd
+import numpy as np
+
+def getnp(df):
+    df['mapSex'] = df['Sex'].map(lambda x: {'male': 0, 'female': 1}[x])
+    dfx = df[['Pclass', 'mapSex', 'Age', 'SibSp', 'Parch', 'Fare']].copy()
+    dfx['Fare'].fillna(0, inplace=True)
+    dfx['Age'].fillna(0, inplace=True)
+    if 'Survived' in df.columns:
+        y = df['Survived'].to_numpy()
+    else:
+        y = None
+    X = dfx.to_numpy()
+    return (X, y)
+
+X_train, y_train = getnp(dftrain)
+X_test, _ = getnp(dftest)
+```
+
+
+For the purpose of submitting to Kaggle, after getting `y_pred`, we could use the following file to prepare for the submission file.
+
+```{python}
+#| eval: false
+def getdf(df, y):
+    df['Survived'] = y
+    return df[['PassengerId', 'Survived']]
+
+getdf(dftest, y_pred).to_csv('result.csv')
+```

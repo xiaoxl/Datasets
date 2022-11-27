@@ -1,0 +1,93 @@
+# From `Python` packages
+
+
+## the `iris` dataset
+
+
+
+```{python}
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+```
+
+
+## The `breast_cancer` dataset
+
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+
+cancer = load_breast_cancer()
+X = cancer.data
+y = cancer.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+```
+
+
+
+## The dataset randomly generated
+### `make_moon` dataset
+
+This is used to generate two interleaving half circles.
+
+
+```{python}
+from sklearn.datasets import make_moons
+from sklearn.model_selection import train_test_split
+
+X, y = make_moons(n_samples=10000, noise=0.4, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+```
+
+### `make_gaussian_quantiles` dataset
+
+This is a generated isotropic Gaussian and label samples by quantile. 
+
+The following code are from [this page](https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_twoclass.html#sphx-glr-auto-examples-ensemble-plot-adaboost-twoclass-py). It is used to generate a relative complex dataset by combining two datesets together.
+
+
+```{python}
+from sklearn.datasets import make_gaussian_quantiles
+from sklearn.model_selection import train_test_split
+
+X1, y1 = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,
+                                 n_classes=2, random_state=1)
+X2, y2 = make_gaussian_quantiles(mean=(3, 3), cov=1.5, n_samples=300,
+                                 n_features=2, n_classes=2, random_state=1)
+X = np.concatenate((X1, X2))
+y = np.concatenate((y1, -y2 + 1))
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+```
+It can also be used to generate multiclass dataset.
+
+
+```{python}
+from sklearn.datasets import make_gaussian_quantiles
+from sklearn.model_selection import train_test_split
+
+X, y = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,
+                               n_classes=4, random_state=1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+```
+
+
+### `make_classification`
+  
+This will create a multiclass dataset. Without shuffling, `X` horizontally stacks features in the following order: the primary `n_informative` features, followed by `n_redundant` linear combinations of the informative features, followed by `n_repeated` duplicates, drawn randomly with replacement from the informative and redundant features. 
+
+For more details please see the [official document](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification).
+
+
+```{python}
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+
+X, y = make_classification(n_samples=1000, n_features=10, n_informative=2, n_redundant=2, n_repeated=2, n_classes=3, n_clusters_per_class=1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+```

@@ -1,0 +1,51 @@
+# From DART repository
+
+
+
+## Plant survival data with salt and microbe treatments
+
+This dataset is supported by DART SEED grant. It is provided by Dr. Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from {Download}`here<assests/datasets/plants.xlsx>`.
+
+We could use the following code to read the data.
+
+
+
+```{python}
+import pandas as pd
+
+df = pd.read_excel('assests/datasets/plants.xlsx', engine='openpyxl', sheet_name='data')
+```
+
+
+There are a few missing values. The missing values in `Outcome_after 12 months` are all `dead`. These are not recorded as `dead` because the cause of the death is more complicated and needs to be studied separatedly. In our case we could simply fill it with `dead`.
+
+There are two more missing values in `Stem diameter`. For simplicity we drop them directly.
+
+
+```{python}
+df['Outcome_after 12 months'].fillna('dead', inplace=True)
+df = df.dropna()
+```
+
+
+Then we would like to transform the data. Here are the rules. 
+
+- `Endophyte`: `I+`->`1`, `I-`->`-1`
+- `Treatment`: `Salt`->`1`, `Fresh`->`0`
+- `Tree_Replicate`: `T1`->`1`, `T2`->`2`, `T3`->`3`
+- `Outcome_after 12 months`: `survived`->`1`, `dead`->0
+
+Column `SN` will be dropped. 
+
+Finally we put these together to get the features `X` and the label `y`.
+
+
+```{python}
+df['Endophyte '] = df['Endophyte '].map({'I+': 1, 'I-': -1})
+df['Treatment'] = df['Treatment'].map({'Fresh': 0, 'Salt': 1})
+df['Tree_Replicate'] = df['Tree_Replicate'].str[1].astype(int)
+df['Outcome_after 12 months'] = df['Outcome_after 12 months'].map({'survived': 1, 'dead': 0})
+
+X = df.iloc[:, 1: -1].to_numpy()
+y = df['Outcome_after 12 months'].to_numpy()
+```

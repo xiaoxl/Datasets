@@ -1,0 +1,56 @@
+project:
+  type: book
+  output-dir: docs
+
+toc: true
+number-sections: true
+toc-depth: 3
+number-depth: 4
+bibliography: book.bib
+csl: C:/Users/Xinli/Documents/ims.csl
+
+crossref:
+  labels: arabic        # (default is arabic)
+  subref-labels: roman i # (default is alpha a)
+
+
+jupyter: base23
+
+format:
+  html:
+    theme: 
+      - cosmo
+    code-block-bg: true
+    code-block-border-left: true 
+    code-line-numbers: true
+    highlight-style: atom-one
+  pdf:
+    documentclass: scrreprt
+
+book:
+  title: "Datasets Collection"
+  author: "Xinli Xiao"
+  date: last-modified
+  chapters: 
+    - index.qmd
+    - contents/python.qmd
+    - contents/R.qmd
+    - contents/online.qmd
+    - contents/book.qmd
+    - contents/dart.qmd
+  sidebar:
+    style: floating
+    pinned: true
+    align: center
+    border: true
+    search: true
+    collapse-level: 1
+  navbar:
+    subtitle: "Fall 2023"
+  page-navigation: true
+
+
+    
+
+
+
