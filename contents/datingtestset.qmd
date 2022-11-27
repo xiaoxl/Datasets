@@ -1,9 +1,9 @@
-# From books
 
-## the Dating dataset
+# the Dating dataset
 The data file can be downloaded from {Download}`here<./assests/datasets/datingTestSet2.txt>`. 
 
 ```{python}
+#| eval: false
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split

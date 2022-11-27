@@ -1,0 +1,55 @@
+
+# `titanic` dataset
+This is the famuous Kaggle101 dataset. The original data can be download from [the Kaggle page](https://www.kaggle.com/competitions/titanic/data). You may also download the {Download}`training data<./assests/datasets/titanic/train.csv>` and the {Download}`test data<./assests/datasets/titanic/test.csv>` by click the link.
+
+```{python}
+#| eval: false
+import pandas as pd
+dftrain = pd.read_csv('train.csv')
+dftest = pd.read_csv('test.csv')
+```
+
+
+
+
+
+
+The original is a little bit messy with missing values and mix of numeric data and string data. The above code reads the data into a DataFrame. The following code does some basic of preprocess. This part should be modified if you want to improve the performance of your model.
+
+1. Only select columns: `Pclass`, `Sex`, `Age`, `SibSp`, `Parch`, `Fare`. That is to say, `Name`, `Cabin` and `Embarked` are dropped.
+2. Fill the missing values in column `Age` and `Fare` by `0`.
+3. Replace the column `Sex` by the following map: `{'male': 0, 'female': 1}`.
+
+
+```{python}
+#| eval: false
+import pandas as pd
+import numpy as np
+
+def getnp(df):
+    df['mapSex'] = df['Sex'].map(lambda x: {'male': 0, 'female': 1}[x])
+    dfx = df[['Pclass', 'mapSex', 'Age', 'SibSp', 'Parch', 'Fare']].copy()
+    dfx['Fare'].fillna(0, inplace=True)
+    dfx['Age'].fillna(0, inplace=True)
+    if 'Survived' in df.columns:
+        y = df['Survived'].to_numpy()
+    else:
+        y = None
+    X = dfx.to_numpy()
+    return (X, y)
+
+X_train, y_train = getnp(dftrain)
+X_test, _ = getnp(dftest)
+```
+
+
+For the purpose of submitting to Kaggle, after getting `y_pred`, we could use the following file to prepare for the submission file.
+
+```{python}
+#| eval: false
+def getdf(df, y):
+    df['Survived'] = y
+    return df[['PassengerId', 'Survived']]
+
+getdf(dftest, y_pred).to_csv('result.csv')
+```

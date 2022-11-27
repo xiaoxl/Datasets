@@ -1,8 +1,5 @@
-# From DART repository
 
-
-
-## Plant survival data with salt and microbe treatments
+# Plant survival data with salt and microbe treatments
 
 This dataset is supported by DART SEED grant. It is provided by Dr. Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from {Download}`here<assests/datasets/plants.xlsx>`.
 
@@ -11,6 +8,7 @@ We could use the following code to read the data.
 
 
 ```{python}
+#| eval: false
 import pandas as pd
 
 df = pd.read_excel('assests/datasets/plants.xlsx', engine='openpyxl', sheet_name='data')
@@ -23,6 +21,7 @@ There are two more missing values in `Stem diameter`. For simplicity we drop the
 
 
 ```{python}
+#| eval: false
 df['Outcome_after 12 months'].fillna('dead', inplace=True)
 df = df.dropna()
 ```
@@ -41,6 +40,7 @@ Finally we put these together to get the features `X` and the label `y`.
 
 
 ```{python}
+#| eval: false
 df['Endophyte '] = df['Endophyte '].map({'I+': 1, 'I-': -1})
 df['Treatment'] = df['Treatment'].map({'Fresh': 0, 'Salt': 1})
 df['Tree_Replicate'] = df['Tree_Replicate'].str[1].astype(int)

@@ -1,0 +1,46 @@
+# Datasets in `ds4psy` 
+
+## `R` codes
+`ds4psy` is a R package. There are several dataset in the package. The R package can be installed directly.
+
+```{r}
+#| eval: false
+install.packages("ds4psy")
+```
+After load the package, the four tibbles will be directly loaded.
+
+
+```{r}
+#| warning: false
+library(ds4psy)
+t_1
+t_2
+t_3
+t_4
+```
+
+
+
+## `csv` files
+The four tibbles can be downloaded directly from here, as `csv` files.
+
+[`t_1.csv`](assests/datasets/ds4psy/t_1.csv)
+
+[`t_2.csv`](assests/datasets/ds4psy/t_2.csv)
+
+[`t_3.csv`](assests/datasets/ds4psy/t_3.csv)
+
+[`t_4.csv`](assests/datasets/ds4psy/t_4.csv)
+
+## `Python` codes
+After the `csv` files are downloaded, you may also use `Python` codes to load them.
+
+
+```{python}
+#| eval: false
+import pandas as pd
+t1 = pd.read_csv('t_1.csv')
+t2 = pd.read_csv('t_2.csv')
+t3 = pd.read_csv('t_3.csv')
+t4 = pd.read_csv('t_4.csv')
+```

@@ -13,6 +13,8 @@ crossref:
   labels: arabic        # (default is arabic)
   subref-labels: roman i # (default is alpha a)
 
+execute: 
+  freeze: auto
 
 jupyter: base23
 
@@ -30,12 +32,16 @@ book:
   author: "Xinli Xiao"
   date: last-modified
   chapters: 
-    - index.qmd
-    - contents/python.qmd
-    - contents/R.qmd
-    - contents/online.qmd
-    - contents/book.qmd
-    - contents/dart.qmd
+    - index.qmd    
+    - contents/breast_cancer.qmd
+    - contents/datingtestset.qmd
+    - contents/ds4psy.qmd
+    - contents/horse_colic.qmd
+    - contents/iris.qmd
+    - contents/mnist.qmd
+    - contents/plants_survival.qmd
+    - contents/random.qmd
+    - contents/titanic.qmd    
   sidebar:
     style: floating
     pinned: true

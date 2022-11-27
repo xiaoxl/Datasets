@@ -1,0 +1,11 @@
+{
+  "hash": "c6758975b349d567f9f5a83670931a03",
+  "result": {
+    "markdown": "# `titanic` dataset\nThis is the famuous Kaggle101 dataset. The original data can be download from [the Kaggle page](https://www.kaggle.com/competitions/titanic/data). You may also download the {Download}`training data<./assests/datasets/titanic/train.csv>` and the {Download}`test data<./assests/datasets/titanic/test.csv>` by click the link.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport pandas as pd\ndftrain = pd.read_csv('train.csv')\ndftest = pd.read_csv('test.csv')\n```\n:::\n\n\nThe original is a little bit messy with missing values and mix of numeric data and string data. The above code reads the data into a DataFrame. The following code does some basic of preprocess. This part should be modified if you want to improve the performance of your model.\n\n1. Only select columns: `Pclass`, `Sex`, `Age`, `SibSp`, `Parch`, `Fare`. That is to say, `Name`, `Cabin` and `Embarked` are dropped.\n2. Fill the missing values in column `Age` and `Fare` by `0`.\n3. Replace the column `Sex` by the following map: `{'male': 0, 'female': 1}`.\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\nimport pandas as pd\nimport numpy as np\n\ndef getnp(df):\n    df['mapSex'] = df['Sex'].map(lambda x: {'male': 0, 'female': 1}[x])\n    dfx = df[['Pclass', 'mapSex', 'Age', 'SibSp', 'Parch', 'Fare']].copy()\n    dfx['Fare'].fillna(0, inplace=True)\n    dfx['Age'].fillna(0, inplace=True)\n    if 'Survived' in df.columns:\n        y = df['Survived'].to_numpy()\n    else:\n        y = None\n    X = dfx.to_numpy()\n    return (X, y)\n\nX_train, y_train = getnp(dftrain)\nX_test, _ = getnp(dftest)\n```\n:::\n\n\nFor the purpose of submitting to Kaggle, after getting `y_pred`, we could use the following file to prepare for the submission file.\n\n::: {.cell execution_count=3}\n``` {.python .cell-code}\ndef getdf(df, y):\n    df['Survived'] = y\n    return df[['PassengerId', 'Survived']]\n\ngetdf(dftest, y_pred).to_csv('result.csv')\n```\n:::\n\n\n",
+    "supporting": [
+      "titanic_files\\figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

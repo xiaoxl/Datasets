@@ -1,0 +1,13 @@
+
+# `MNIST` dataset
+
+There are several versions of the dataset. 
+
+- `tensorflow` provides the data with the original split.
+
+
+```{python}
+#| eval: false
+import tensorflow.keras as keras
+(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()
+```

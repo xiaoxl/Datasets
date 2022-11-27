@@ -1,43 +1,12 @@
-# From `Python` packages
 
-
-## the `iris` dataset
-
-
-
-```{python}
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
-```
-
-
-## The `breast_cancer` dataset
-
-
-```{python}
-from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import train_test_split
-
-cancer = load_breast_cancer()
-X = cancer.data
-y = cancer.target
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
-```
-
-
-
-## The dataset randomly generated
-### `make_moon` dataset
+# Randomly generated datasets
+## `make_moon` dataset
 
 This is used to generate two interleaving half circles.
 
 
 ```{python}
+#| eval: false
 from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
 
@@ -45,7 +14,7 @@ X, y = make_moons(n_samples=10000, noise=0.4, random_state=42)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
 ```
 
-### `make_gaussian_quantiles` dataset
+## `make_gaussian_quantiles` dataset
 
 This is a generated isotropic Gaussian and label samples by quantile. 
 
@@ -53,6 +22,7 @@ The following code are from [this page](https://scikit-learn.org/stable/auto_exa
 
 
 ```{python}
+#| eval: false
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.model_selection import train_test_split
 import numpy as np
@@ -69,6 +39,7 @@ It can also be used to generate multiclass dataset.
 
 
 ```{python}
+#| eval: false
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.model_selection import train_test_split
 
@@ -78,7 +49,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
 ```
 
 
-### `make_classification`
+## `make_classification`
   
 This will create a multiclass dataset. Without shuffling, `X` horizontally stacks features in the following order: the primary `n_informative` features, followed by `n_redundant` linear combinations of the informative features, followed by `n_repeated` duplicates, drawn randomly with replacement from the informative and redundant features. 
 
@@ -86,6 +57,7 @@ For more details please see the [official document](https://scikit-learn.org/sta
 
 
 ```{python}
+#| eval: false
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 

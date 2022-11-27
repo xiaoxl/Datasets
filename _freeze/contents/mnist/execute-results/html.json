@@ -1,0 +1,11 @@
+{
+  "hash": "c2898d139489926621569413391a0fef",
+  "result": {
+    "markdown": "# `MNIST` dataset\n\nThere are several versions of the dataset. \n\n- `tensorflow` provides the data with the original split.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport tensorflow.keras as keras\n(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()\n```\n:::\n\n\n",
+    "supporting": [
+      "mnist_files\\figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
