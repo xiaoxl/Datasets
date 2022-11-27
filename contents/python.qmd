@@ -55,6 +55,7 @@ The following code are from [this page](https://scikit-learn.org/stable/auto_exa
 ```{python}
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.model_selection import train_test_split
+import numpy as np
 
 X1, y1 = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,
                                  n_classes=2, random_state=1)

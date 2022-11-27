@@ -24,8 +24,6 @@ format:
     code-block-border-left: true 
     code-line-numbers: true
     highlight-style: atom-one
-  pdf:
-    documentclass: scrreprt
 
 book:
   title: "Datasets Collection"
