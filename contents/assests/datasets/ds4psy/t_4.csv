@@ -1,0 +1,17 @@
+"","name","gender","age","position","blue","red","circle","square"
+"1","Ann","f",31,1,NA,73,NA,NA
+"2","Ann","f",31,2,NA,NA,64,NA
+"3","Bea","f",18,1,NA,NA,42,NA
+"4","Bea","f",18,2,18,NA,NA,NA
+"5","Cat","f",42,1,NA,31,NA,NA
+"6","Cat","f",42,2,NA,NA,NA,41
+"7","Deb","f",18,1,NA,NA,NA,51
+"8","Deb","f",18,2,35,NA,NA,NA
+"9","Ed","m",21,1,NA,71,NA,NA
+"10","Ed","m",21,2,NA,NA,44,NA
+"11","Fred","m",63,1,NA,NA,63,NA
+"12","Fred","m",63,2,56,NA,NA,NA
+"13","Gary","m",22,1,NA,60,NA,NA
+"14","Gary","m",22,2,NA,NA,NA,98
+"15","Hans","m",31,1,NA,NA,NA,41
+"16","Hans","m",31,2,40,NA,NA,NA
