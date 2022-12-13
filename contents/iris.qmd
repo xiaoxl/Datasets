@@ -1,5 +1,5 @@
 
-# the `iris` dataset
+# `iris` dataset
 
 ```{python}
 #| eval: false

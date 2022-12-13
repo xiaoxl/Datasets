@@ -1,0 +1,23 @@
+## Kaggle Diabetes
+
+This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective is to predict based on diagnostic measurements whether a patient has diabetes. The dataset is now transferred from Kaggle. The dataset file can be downloaded from [here](assests/datasets/diabetes.csv). After downloading it, you may put it in the working directory and use the following code to load it.
+
+
+```{python}
+#| eval: false
+import pandas as pd
+
+df = pd.read_csv('diabetes.csv', header=0)
+```
+
+Several constraints were placed on the selection of these instances from a larger database. In particular, all patients here are females at least 21 years old of Pima Indian heritage.
+
+- Pregnancies: Number of times pregnant (numeric)
+- Glucose: Plasma glucose concentration a 2 hours in an oral glucose tolerance test (numeric)
+- BloodPressure: Diastolic blood pressure (mm Hg) (numeric)
+- SkinThickness: Triceps skin fold thickness (mm) (numeric)
+- Insulin: 2-Hour serum insulin (mu U/ml) (numeric)
+- BMI: Body mass index (weight in kg/(height in m)^2) (numeric)
+- DiabetesPedigreeFunction: Diabetes pedigree function (numeric)
+- Age: Age (years) (numeric)
+- Outcome: Class variable (0 or 1) (categorical)

@@ -1,5 +1,5 @@
 
-# the Horse Colic Dataset
+# Horse Colic Dataset
 The data is from the [UCI database](https://archive.ics.uci.edu/ml/datasets/Horse+Colic). The data is loaded as follows. `?` represents missing data.
 
 

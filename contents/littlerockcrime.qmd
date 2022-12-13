@@ -1,0 +1,24 @@
+## Little Rock Crime Dataset
+
+The dataset was collected from the Open Data source called little rock's data hub. This dataset is 13 MB with 80,926 rows/observation and 14 different columns. The principal motivation behind using this dataset is to create a precise model to anticipate crimes. It can be downloaded from [here](assests/datasets/lrpd.csv). 
+
+The dataset could be cleaned as follows.
+
+Data Cleaning and wraggling steps:
+
+1. Remove all the duplicates in the column `INCIDENT_NUMBER`.
+2. Set `INCIDENT_NUMBER` to be the index to uniquely identify offenses.
+3. Fill the missing values on `WEAPON_TYPE` to be `NO WEAPON`. Fill all other missing values by `0`.
+4. Change `1` in `WEAPON_TYPE` to be `UNKNOWN`.
+5. Reassigned the columns to their respective types, e.g. numbers are numeric types and characters are strings. 
+6. Parse the `INCIDENT_DATE` to find out the year, month, day, hour and min and create columns accordingly. Note that `AM/PM` is taken into consideration when computating hours.
+7. Create a column `CRIME_TYPE` based on the following rules: 
+
+    - If the `OFFENSE_CODE` contains `23`, the crime is `Non-Violent`.
+    - If the `OFFENSE_DESCRIPTION` contains `THEFT`, the crime is `Non-Violent`.
+    - All other crimes are `Violent Crime`.
+8. Create a column `RISK_TYPE` based on the following rules:
+
+    - If the crime is `Non-Violent` and `NO WEAPON`, it is `Low Risk`.
+    - All other crimes are `High Risk`.
+

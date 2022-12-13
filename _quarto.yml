@@ -36,8 +36,11 @@ book:
     - contents/breast_cancer.qmd
     - contents/datingtestset.qmd
     - contents/ds4psy.qmd
+    - contents/faker.qmd
     - contents/horse_colic.qmd
     - contents/iris.qmd
+    - contents/kagglediabetes.qmd
+    - contents/littlerockcrime.qmd
     - contents/mnist.qmd
     - contents/plants_survival.qmd
     - contents/random.qmd
