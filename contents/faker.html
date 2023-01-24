@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Datasets Collection - 8&nbsp; Little Rock Crime Dataset</title>
+<title>Datasets Collection - 4&nbsp; Faker</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,8 +29,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../contents/mnist.html" rel="next">
-<link href="../contents/kagglediabetes.html" rel="prev">
+<link href="../contents/horse_colic.html" rel="next">
+<link href="../contents/ds4psy.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Little Rock Crime Dataset</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><code>Faker</code></span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../contents/faker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><code>Faker</code></span></a>
+  <a href="../contents/faker.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><code>Faker</code></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -139,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../contents/littlerockcrime.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Little Rock Crime Dataset</span></a>
+  <a href="../contents/littlerockcrime.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Little Rock Crime Dataset</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Little Rock Crime Dataset</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><code>Faker</code></span></h1>
 </div>
 
 
@@ -189,28 +189,6 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The dataset was collected from the Open Data source called little rock’s data hub. This dataset is 13 MB with 80,926 rows/observation and 14 different columns. The principal motivation behind using this dataset is to create a precise model to anticipate crimes. It can be downloaded from <a href="assests/datasets/lrpd.csv">here</a>.</p>
-<p>The dataset could be cleaned as follows.</p>
-<p>Data Cleaning and wraggling steps:</p>
-<ol type="1">
-<li><p>Remove all the duplicates in the column <code>INCIDENT_NUMBER</code>.</p></li>
-<li><p>Set <code>INCIDENT_NUMBER</code> to be the index to uniquely identify offenses.</p></li>
-<li><p>Fill the missing values on <code>WEAPON_TYPE</code> to be <code>NO WEAPON</code>. Fill all other missing values by <code>0</code>.</p></li>
-<li><p>Change <code>1</code> in <code>WEAPON_TYPE</code> to be <code>UNKNOWN</code>.</p></li>
-<li><p>Reassigned the columns to their respective types, e.g.&nbsp;numbers are numeric types and characters are strings.</p></li>
-<li><p>Parse the <code>INCIDENT_DATE</code> to find out the year, month, day, hour and min and create columns accordingly. Note that <code>AM/PM</code> is taken into consideration when computating hours.</p></li>
-<li><p>Create a column <code>CRIME_TYPE</code> based on the following rules:</p>
-<ul>
-<li>If the <code>OFFENSE_CODE</code> contains <code>23</code>, the crime is <code>Non-Violent</code>.</li>
-<li>If the <code>OFFENSE_DESCRIPTION</code> contains <code>THEFT</code>, the crime is <code>Non-Violent</code>.</li>
-<li>All other crimes are <code>Violent Crime</code>.</li>
-</ul></li>
-<li><p>Create a column <code>RISK_TYPE</code> based on the following rules:</p>
-<ul>
-<li>If the crime is <code>Non-Violent</code> and <code>NO WEAPON</code>, it is <code>Low Risk</code>.</li>
-<li>All other crimes are <code>High Risk</code>.</li>
-</ul></li>
-</ol>
 
 
 
@@ -350,13 +328,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../contents/kagglediabetes.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Kaggle Diabetes</span></span>
+      <a href="../contents/ds4psy.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datasets in <code>ds4psy</code></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../contents/mnist.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><code>MNIST</code> dataset</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../contents/horse_colic.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Horse Colic Dataset</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
