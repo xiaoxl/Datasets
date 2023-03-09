@@ -1,6 +1,6 @@
 
 # `titanic` dataset
-This is the famuous Kaggle101 dataset. The original data can be download from [the Kaggle page](https://www.kaggle.com/competitions/titanic/data). You may also download the {Download}`training data<./assests/datasets/titanic/train.csv>` and the {Download}`test data<./assests/datasets/titanic/test.csv>` by click the link.
+This is the famuous Kaggle101 dataset. The original data can be download from [the Kaggle page](https://www.kaggle.com/competitions/titanic/data). You may also download the [training set](./assests/datasets/titanic/train.csv) and the [test data](./assests/datasets/titanic/test.csv) by click the link.
 
 ```{python}
 #| eval: false

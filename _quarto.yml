@@ -43,6 +43,7 @@ book:
     - contents/littlerockcrime.qmd
     - contents/mnist.qmd
     - contents/plants_survival.qmd
+    - contents/QSR.qmd
     - contents/random.qmd
     - contents/titanic.qmd    
   sidebar:

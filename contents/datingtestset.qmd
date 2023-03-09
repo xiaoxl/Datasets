@@ -1,6 +1,6 @@
 
 # Dating dataset
-The data file can be downloaded from {Download}`here<./assests/datasets/datingTestSet2.txt>`. 
+The data file can be downloaded from [here](./assests/datasets/datingTestSet2.txt). 
 
 ```{python}
 #| eval: false

@@ -1,7 +1,7 @@
 
 # Plant survival data with salt and microbe treatments
 
-This dataset is supported by DART SEED grant. It is provided by Dr. Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from {Download}`here<assests/datasets/plants.xlsx>`.
+This dataset is supported by DART SEED grant. It is provided by Dr. Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from [here](assests/datasets/plants.xlsx).
 
 We could use the following code to read the data.
 

@@ -1,0 +1,3 @@
+# QSR
+
+Here is the dataset [QSR](assests/datasets/QSR.csv).
