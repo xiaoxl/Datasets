@@ -1,7 +1,7 @@
 
 # `MNIST` dataset
 This is a famous dataset for handwritten digits recognition. More info can be found from [its website](https://yann.lecun.com/exdb/mnist/).
-There are several versions of the dataset (that almost all machine learning libraries have it in their datasets). Here I provide the version from Huggingface Hub.
+There are several versions of the dataset (that almost all machine learning libraries have it in their datasets). Here I provide the version from Huggingface Hub. The tensorflow version is updated but kept here.
 
 
 ## Huggingface Hub
