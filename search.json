@@ -110,11 +110,11 @@
     ]
   },
   {
-    "objectID": "contents/mnist.html#tensorflow-version",
-    "href": "contents/mnist.html#tensorflow-version",
+    "objectID": "contents/mnist.html#tensorflow-version-possibly-outdated",
+    "href": "contents/mnist.html#tensorflow-version-possibly-outdated",
     "title": "9  MNIST dataset",
-    "section": "9.2 tensorflow version",
-    "text": "9.2 tensorflow version\ntensorflow/keras provides the data with the original split. This version is not recommended since keras changed a lot during recent updates so if you use newer version the following code might not work. In addition it takes a long time to install tensorflow library.\n\nimport tensorflow.keras as keras\n(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()",
+    "section": "9.2 tensorflow version (possibly outdated)",
+    "text": "9.2 tensorflow version (possibly outdated)\ntensorflow/keras provides the data with the original split. This version is not recommended since keras changed a lot during recent updates so if you use newer version the following code might not work. In addition it takes a long time to install tensorflow library.\n\nimport tensorflow.keras as keras\n(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>`MNIST` dataset</span>"
     ]
