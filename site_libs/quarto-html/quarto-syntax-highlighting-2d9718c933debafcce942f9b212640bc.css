@@ -37,6 +37,7 @@
 }
 
 code span.al {
+  background-color: #4d1f24;
   font-weight: bold;
   color: #95da4c;
 }
@@ -147,6 +148,7 @@ code span.pp {
 }
 
 code span.re {
+  background-color: #153042;
   color: #2980b9;
 }
 
@@ -178,4 +180,4 @@ code span.wa {
   content: "</";
 }
 
-/*# sourceMappingURL=debc5d5d77c3f9108843748ff7464032.css.map */
+/*# sourceMappingURL=5769a3bbf7c4ef9e9e4b18c10ddfd215.css.map */
