@@ -267,18 +267,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This is a famous dataset for handwritten digits recognition. More info can be found from <a href="https://yann.lecun.com/exdb/mnist/">its website</a>. There are several versions of the dataset (that almost all machine learning libraries have it in their datasets). Here I provide the version from Huggingface Hub.</p>
+<p>This is a famous dataset for handwritten digits recognition. More info can be found from <a href="https://yann.lecun.com/exdb/mnist/">its website</a>. There are several versions of the dataset (that almost all machine learning libraries have it in their datasets). Here I provide the version from Huggingface Hub. The tensorflow version is outdated but kept here for reference.</p>
 <section id="huggingface-hub" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="huggingface-hub"><span class="header-section-number">9.1</span> Huggingface Hub</h2>
 <p>The dataset and description can be found from the <a href="https://huggingface.co/datasets/ylecun/mnist">Hugging Face hub</a>. You may use the following code to load the dataset. The installation guide of the <code>datasets</code> library can be found in its <a href="https://huggingface.co/docs/datasets/en/installation">homepage</a>.</p>
-<div id="79f7e218" class="cell" data-execution_count="1">
+<div id="657b23fb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> datasets <span class="im">import</span> load_dataset</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>mnist_train <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'train'</span>, streaming<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb1-4"><a href="#cb1-4"></a>mnist_test <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'test'</span>, streaming<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The loaded datasets contains images. We may directly visualize it. Note that we load the dataset in streaming mode, so it is a generator and will give images one by one.</p>
-<div id="94fd0a4c" class="cell" data-execution_count="2">
+<div id="f8cdbc2c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>nextdata <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(mnist_train))</span>
 <span id="cb2-2"><a href="#cb2-2"></a>pic <span class="op">=</span> nextdata[<span class="st">'image'</span>]</span>
 <span id="cb2-3"><a href="#cb2-3"></a>label <span class="op">=</span> nextdata[<span class="st">'label'</span>]</span>
@@ -291,14 +291,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f572d539" class="cell" data-execution_count="3">
+<div id="9ce1c19d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>5</code></pre>
 </div>
 </div>
 <p>If we want to use the data, we would like to turn them into matrices. Here we directly flatten the images into row vectors.</p>
-<div id="c92f3624" class="cell" data-execution_count="4">
+<div id="bed85b8e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="kw">def</span> stream_to_array(streaming):</span>
@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-12"><a href="#cb5-12"></a>X_test, y_test <span class="op">=</span> stream_to_array(mnist_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We could check the size of these data.</p>
-<div id="fb42c297" class="cell" data-execution_count="5">
+<div id="80bdeaad" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">print</span>(<span class="ss">f"The size of training features is </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">."</span>)</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="bu">print</span>(<span class="ss">f"The size of training labels is </span><span class="sc">{</span>y_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">."</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="bu">print</span>(<span class="ss">f"The size of testing features is </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">."</span>)</span>
@@ -329,7 +329,7 @@ The size of testing labels is (10000,).</code></pre>
 <section id="tensorflow-version-possibly-outdated" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="tensorflow-version-possibly-outdated"><span class="header-section-number">9.2</span> <code>tensorflow</code> version (possibly outdated)</h2>
 <p><code>tensorflow</code>/<code>keras</code> provides the data with the original split. This version is not recommended since <code>keras</code> changed a lot during recent updates so if you use newer version the following code might not work. In addition it takes a long time to install <code>tensorflow</code> library.</p>
-<div id="b50faa7b" class="cell" data-execution_count="6">
+<div id="9d08b6e6" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> tensorflow.keras <span class="im">as</span> keras</span>
 <span id="cb8-2"><a href="#cb8-2"></a>(X_train, y_train), (X_test, y_test) <span class="op">=</span> keras.datasets.mnist.load_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
