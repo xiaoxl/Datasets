@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The data is from the <a href="https://archive.ics.uci.edu/ml/datasets/Horse+Colic">UCI database</a>. The data is loaded as follows. <code>?</code> represents missing data.</p>
-<div id="46efa3ff" class="cell" data-execution_count="1">
+<div id="7c699085" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We also would like to change the label from <code>1</code> and <code>2</code> to <code>0</code> and <code>1</code> for the purpose of Logistic regression.</li>
 </ol>
 <p><em>This part should be modified if you want to improve the performance of your model.</em></p>
-<div id="3ce90946" class="cell" data-execution_count="2">
+<div id="3a972e51" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>df.fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>df.drop(columns<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">27</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>df[<span class="dv">23</span>].replace({<span class="dv">1</span>: <span class="dv">1</span>, <span class="dv">2</span>: <span class="dv">0</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>

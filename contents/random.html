@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="make_moon-dataset" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="make_moon-dataset"><span class="header-section-number">12.1</span> <code>make_moon</code> dataset</h2>
 <p>This is used to generate two interleaving half circles.</p>
-<div id="33b54ba8" class="cell" data-execution_count="1">
+<div id="34f5a8b4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="12.2" class="anchored" data-anchor-id="make_gaussian_quantiles-dataset"><span class="header-section-number">12.2</span> <code>make_gaussian_quantiles</code> dataset</h2>
 <p>This is a generated isotropic Gaussian and label samples by quantile.</p>
 <p>The following code are from <a href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_twoclass.html#sphx-glr-auto-examples-ensemble-plot-adaboost-twoclass-py">this page</a>. It is used to generate a relative complex dataset by combining two datesets together.</p>
-<div id="d9db1bda" class="cell" data-execution_count="2">
+<div id="94fe92b6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_gaussian_quantiles</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -297,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-11"><a href="#cb2-11"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It can also be used to generate multiclass dataset.</p>
-<div id="e4aadc60" class="cell" data-execution_count="3">
+<div id="305e66a8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_gaussian_quantiles</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -310,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="12.3" class="anchored" data-anchor-id="make_classification"><span class="header-section-number">12.3</span> <code>make_classification</code></h2>
 <p>This will create a multiclass dataset. Without shuffling, <code>X</code> horizontally stacks features in the following order: the primary <code>n_informative</code> features, followed by <code>n_redundant</code> linear combinations of the informative features, followed by <code>n_repeated</code> duplicates, drawn randomly with replacement from the informative and redundant features.</p>
 <p>For more details please see the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification">official document</a>.</p>
-<div id="90af7857" class="cell" data-execution_count="4">
+<div id="50c199db" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>

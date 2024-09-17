@@ -262,14 +262,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This dataset is supported by DART SEED grant. It is provided by Dr.&nbsp;Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from <a href="assests/datasets/plants.xlsx">here</a>.</p>
 <p>We could use the following code to read the data.</p>
-<div id="aa54990e" class="cell" data-execution_count="1">
+<div id="9d338c65" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>df <span class="op">=</span> pd.read_excel(<span class="st">'assests/datasets/plants.xlsx'</span>, engine<span class="op">=</span><span class="st">'openpyxl'</span>, sheet_name<span class="op">=</span><span class="st">'data'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are a few missing values. The missing values in <code>Outcome_after 12 months</code> are all <code>dead</code>. These are not recorded as <code>dead</code> because the cause of the death is more complicated and needs to be studied separatedly. In our case we could simply fill it with <code>dead</code>.</p>
 <p>There are two more missing values in <code>Stem diameter</code>. For simplicity we drop them directly.</p>
-<div id="f1c36fb5" class="cell" data-execution_count="2">
+<div id="e9ff3613" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>df[<span class="st">'Outcome_after 12 months'</span>].fillna(<span class="st">'dead'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>df <span class="op">=</span> df.dropna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -282,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Column <code>SN</code> will be dropped.</p>
 <p>Finally we put these together to get the features <code>X</code> and the label <code>y</code>.</p>
-<div id="4f093609" class="cell" data-execution_count="3">
+<div id="8214c04a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>df[<span class="st">'Endophyte '</span>] <span class="op">=</span> df[<span class="st">'Endophyte '</span>].<span class="bu">map</span>({<span class="st">'I+'</span>: <span class="dv">1</span>, <span class="st">'I-'</span>: <span class="op">-</span><span class="dv">1</span>})</span>
 <span id="cb3-2"><a href="#cb3-2"></a>df[<span class="st">'Treatment'</span>] <span class="op">=</span> df[<span class="st">'Treatment'</span>].<span class="bu">map</span>({<span class="st">'Fresh'</span>: <span class="dv">0</span>, <span class="st">'Salt'</span>: <span class="dv">1</span>})</span>
 <span id="cb3-3"><a href="#cb3-3"></a>df[<span class="st">'Tree_Replicate'</span>] <span class="op">=</span> df[<span class="st">'Tree_Replicate'</span>].<span class="bu">str</span>[<span class="dv">1</span>].astype(<span class="bu">int</span>)</span>

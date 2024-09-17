@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is the famuous Kaggle101 dataset. The original data can be download from <a href="https://www.kaggle.com/competitions/titanic/data">the Kaggle page</a>. You may also download the <a href="./assests/datasets/titanic/train.csv">training set</a> and the <a href="./assests/datasets/titanic/test.csv">test data</a> by click the link.</p>
-<div id="0da17a03" class="cell" data-execution_count="1">
+<div id="c21f97ff" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2"></a>dftrain <span class="op">=</span> pd.read_csv(<span class="st">'train.csv'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>dftest <span class="op">=</span> pd.read_csv(<span class="st">'test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Fill the missing values in column <code>Age</code> and <code>Fare</code> by <code>0</code>.</li>
 <li>Replace the column <code>Sex</code> by the following map: <code>{'male': 0, 'female': 1}</code>.</li>
 </ol>
-<div id="b169baca" class="cell" data-execution_count="2">
+<div id="6045818a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -291,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-17"><a href="#cb2-17"></a>X_test, _ <span class="op">=</span> getnp(dftest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For the purpose of submitting to Kaggle, after getting <code>y_pred</code>, we could use the following file to prepare for the submission file.</p>
-<div id="731cc418" class="cell" data-execution_count="3">
+<div id="d363857d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">def</span> getdf(df, y):</span>
 <span id="cb3-2"><a href="#cb3-2"></a>    df[<span class="st">'Survived'</span>] <span class="op">=</span> y</span>
 <span id="cb3-3"><a href="#cb3-3"></a>    <span class="cf">return</span> df[[<span class="st">'PassengerId'</span>, <span class="st">'Survived'</span>]]</span>
