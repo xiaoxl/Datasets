@@ -1,9 +1,10 @@
 {
-  "hash": "6e120ba5d0f5d44001d5ae2c5da03873",
+  "hash": "ccf85c89854e69ca0f00b189e4829d65",
   "result": {
-    "markdown": "# Dating dataset\nThe data file can be downloaded from [here](./assests/datasets/datingTestSet2.txt). \n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\n\ndf = pd.read_csv('assests/datasets/datingTestSet2.txt', sep='\\t', header=None)\nX = np.array(df[[0, 1, 2]])\ny = np.array(df[3])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n```\n:::\n\n\n",
+    "engine": "jupyter",
+    "markdown": "# Dating dataset\nThe data file can be downloaded from [here](./assests/datasets/datingTestSet2.txt). \n\n::: {#ad3bb016 .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\n\ndf = pd.read_csv('assests/datasets/datingTestSet2.txt', sep='\\t', header=None)\nX = np.array(df[[0, 1, 2]])\ny = np.array(df[3])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n```\n:::\n\n\n",
     "supporting": [
-      "datingtestset_files"
+      "datingtestset_files\\figure-html"
     ],
     "filters": [],
     "includes": {}

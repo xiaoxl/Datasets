@@ -1,7 +1,8 @@
 {
-  "hash": "97d92ddc64d8122c4662fbc9135224c7",
+  "hash": "5fae5f6518d6681bd6dc0aae81c6ac14",
   "result": {
-    "markdown": "# `breast_cancer` dataset\n\n<!-- This dataset is publicly available for research. The details are described in [Patricio, 2018] - [Web Link]. -->\n<!-- Please include this citation if you plan to use this database: -->\n<!-- [Patricio, 2018] Patrício, M., Pereira, J., Crisóstomo, J., Matafome, P., Gomes, M., Seiça, R., & Caramelo, F. (2018). Using Resistin, glucose, age and BMI to predict the presence of breast cancer. BMC Cancer, 18(1). [Web Link] -->\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nfrom sklearn.datasets import load_breast_cancer\nfrom sklearn.model_selection import train_test_split\n\ncancer = load_breast_cancer()\nX = cancer.data\ny = cancer.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n```\n:::\n\n\n",
+    "engine": "jupyter",
+    "markdown": "# `breast_cancer` dataset\n\n<!-- This dataset is publicly available for research. The details are described in [Patricio, 2018] - [Web Link]. -->\n<!-- Please include this citation if you plan to use this database: -->\n<!-- [Patricio, 2018] Patrício, M., Pereira, J., Crisóstomo, J., Matafome, P., Gomes, M., Seiça, R., & Caramelo, F. (2018). Using Resistin, glucose, age and BMI to predict the presence of breast cancer. BMC Cancer, 18(1). [Web Link] -->\n\n::: {#741a54d7 .cell execution_count=1}\n``` {.python .cell-code}\nfrom sklearn.datasets import load_breast_cancer\nfrom sklearn.model_selection import train_test_split\n\ncancer = load_breast_cancer()\nX = cancer.data\ny = cancer.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n```\n:::\n\n\n",
     "supporting": [
       "breast_cancer_files\\figure-html"
     ],

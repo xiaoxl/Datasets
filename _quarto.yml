@@ -16,7 +16,7 @@ crossref:
 execute: 
   freeze: auto
 
-jupyter: base23
+jupyter: ds25
 
 format:
   html:
@@ -54,7 +54,7 @@ book:
     search: true
     collapse-level: 1
   navbar:
-    subtitle: "Fall 2023"
+    subtitle: "Fall 2024"
   page-navigation: true
 
 

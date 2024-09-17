@@ -1,7 +1,8 @@
 {
-  "hash": "72a63cc07f446b81a823533c752556cd",
+  "hash": "1e32851c49e5970c2b5f9d8cc3b28ac2",
   "result": {
-    "markdown": "# `iris` dataset\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nfrom sklearn import datasets\nfrom sklearn.model_selection import train_test_split\n\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n```\n:::\n\n\n",
+    "engine": "jupyter",
+    "markdown": "# `iris` dataset\n\n::: {#26d79492 .cell execution_count=1}\n``` {.python .cell-code}\nfrom sklearn import datasets\nfrom sklearn.model_selection import train_test_split\n\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n```\n:::\n\n\n",
     "supporting": [
       "iris_files\\figure-html"
     ],

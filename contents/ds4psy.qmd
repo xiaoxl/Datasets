@@ -16,15 +16,13 @@ The four tibbles can be downloaded directly from here, as `csv` files.
 ## `R` codes
 `ds4psy` is a R package. There are several dataset in the package. The R package can be installed directly.
 
-```{r}
-#| eval: false
+```r
 install.packages("ds4psy")
 ```
 After load the package, the four tibbles will be directly loaded.
 
 
-```{r}
-#| warning: false
+```r
 library(ds4psy)
 t_1
 t_2
