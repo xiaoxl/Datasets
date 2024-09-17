@@ -4,118 +4,179 @@
     "href": "index.html",
     "title": "Datasets Collection",
     "section": "",
-    "text": "References"
+    "text": "References",
+    "crumbs": [
+      "References"
+    ]
   },
   {
     "objectID": "contents/breast_cancer.html",
     "href": "contents/breast_cancer.html",
     "title": "1  breast_cancer dataset",
     "section": "",
-    "text": "from sklearn.datasets import load_breast_cancer\nfrom sklearn.model_selection import train_test_split\n\ncancer = load_breast_cancer()\nX = cancer.data\ny = cancer.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)"
+    "text": "from sklearn.datasets import load_breast_cancer\nfrom sklearn.model_selection import train_test_split\n\ncancer = load_breast_cancer()\nX = cancer.data\ny = cancer.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>`breast_cancer` dataset</span>"
+    ]
   },
   {
     "objectID": "contents/datingtestset.html",
     "href": "contents/datingtestset.html",
     "title": "2  Dating dataset",
     "section": "",
-    "text": "The data file can be downloaded from here.\n\nimport numpy as np\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\n\ndf = pd.read_csv('assests/datasets/datingTestSet2.txt', sep='\\t', header=None)\nX = np.array(df[[0, 1, 2]])\ny = np.array(df[3])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)"
+    "text": "The data file can be downloaded from here.\n\nimport numpy as np\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\n\ndf = pd.read_csv('assests/datasets/datingTestSet2.txt', sep='\\t', header=None)\nX = np.array(df[[0, 1, 2]])\ny = np.array(df[3])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dating dataset</span>"
+    ]
   },
   {
-    "objectID": "contents/ds4psy.html#csv-files",
-    "href": "contents/ds4psy.html#csv-files",
+    "objectID": "contents/ds4psy.html",
+    "href": "contents/ds4psy.html",
     "title": "3  Datasets in ds4psy",
-    "section": "3.1 csv files",
-    "text": "3.1 csv files\nThe four tibbles can be downloaded directly from here, as csv files.\nt_1.csv\nt_2.csv\nt_3.csv\nt_4.csv"
+    "section": "",
+    "text": "3.1 csv files\nThe four tibbles can be downloaded directly from here, as csv files.\nt_1.csv\nt_2.csv\nt_3.csv\nt_4.csv",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
+    ]
   },
   {
     "objectID": "contents/ds4psy.html#r-codes",
     "href": "contents/ds4psy.html#r-codes",
     "title": "3  Datasets in ds4psy",
     "section": "3.2 R codes",
-    "text": "3.2 R codes\nds4psy is a R package. There are several dataset in the package. The R package can be installed directly.\n\ninstall.packages(\"ds4psy\")\n\nAfter load the package, the four tibbles will be directly loaded.\n\nlibrary(ds4psy)\nt_1\n\n# A tibble: 8 × 9\n  name  gender   age task_1 task_2 color color_time shape  shape_time\n  <chr> <chr>  <dbl> <chr>  <chr>  <chr>      <dbl> <chr>       <dbl>\n1 Ann   f         31 color  shape  red           73 circle         64\n2 Bea   f         18 shape  color  blue          18 circle         42\n3 Cat   f         42 color  shape  red           31 square         41\n4 Deb   f         18 shape  color  blue          35 square         51\n5 Ed    m         21 color  shape  red           71 circle         44\n6 Fred  m         63 shape  color  blue          56 circle         63\n7 Gary  m         22 color  shape  red           60 square         98\n8 Hans  m         31 shape  color  blue          40 square         41\n\nt_2\n\n# A tibble: 8 × 5\n  name  details task_1 color_time shape_time \n  <chr> <chr>   <chr>  <chr>      <chr>      \n1 Ann   f:31    color  red = 73   circle = 64\n2 Bea   f:18    shape  blue = 18  circle = 42\n3 Cat   f:42    color  red = 31   square = 41\n4 Deb   f:18    shape  blue = 35  square = 51\n5 Ed    m:21    color  red = 71   circle = 44\n6 Fred  m:63    shape  blue = 56  circle = 63\n7 Gary  m:22    color  red = 60   square = 98\n8 Hans  m:31    shape  blue = 40  square = 41\n\nt_3\n\n# A tibble: 16 × 6\n   name  gender   age position task    time\n   <chr> <chr>  <dbl>    <dbl> <chr>  <dbl>\n 1 Ann   f         31        1 red       73\n 2 Ann   f         31        2 circle    64\n 3 Bea   f         18        1 circle    42\n 4 Bea   f         18        2 blue      18\n 5 Cat   f         42        1 red       31\n 6 Cat   f         42        2 square    41\n 7 Deb   f         18        1 square    51\n 8 Deb   f         18        2 blue      35\n 9 Ed    m         21        1 red       71\n10 Ed    m         21        2 circle    44\n11 Fred  m         63        1 circle    63\n12 Fred  m         63        2 blue      56\n13 Gary  m         22        1 red       60\n14 Gary  m         22        2 square    98\n15 Hans  m         31        1 square    41\n16 Hans  m         31        2 blue      40\n\nt_4\n\n# A tibble: 16 × 8\n   name  gender   age position  blue   red circle square\n   <chr> <chr>  <dbl>    <dbl> <dbl> <dbl>  <dbl>  <dbl>\n 1 Ann   f         31        1    NA    73     NA     NA\n 2 Ann   f         31        2    NA    NA     64     NA\n 3 Bea   f         18        1    NA    NA     42     NA\n 4 Bea   f         18        2    18    NA     NA     NA\n 5 Cat   f         42        1    NA    31     NA     NA\n 6 Cat   f         42        2    NA    NA     NA     41\n 7 Deb   f         18        1    NA    NA     NA     51\n 8 Deb   f         18        2    35    NA     NA     NA\n 9 Ed    m         21        1    NA    71     NA     NA\n10 Ed    m         21        2    NA    NA     44     NA\n11 Fred  m         63        1    NA    NA     63     NA\n12 Fred  m         63        2    56    NA     NA     NA\n13 Gary  m         22        1    NA    60     NA     NA\n14 Gary  m         22        2    NA    NA     NA     98\n15 Hans  m         31        1    NA    NA     NA     41\n16 Hans  m         31        2    40    NA     NA     NA"
+    "text": "3.2 R codes\nds4psy is a R package. There are several dataset in the package. The R package can be installed directly.\ninstall.packages(\"ds4psy\")\nAfter load the package, the four tibbles will be directly loaded.\nlibrary(ds4psy)\nt_1\nt_2\nt_3\nt_4",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
+    ]
   },
   {
     "objectID": "contents/ds4psy.html#python-codes",
     "href": "contents/ds4psy.html#python-codes",
     "title": "3  Datasets in ds4psy",
     "section": "3.3 Python codes",
-    "text": "3.3 Python codes\nAfter the csv files are downloaded, you may also use Python codes to load them.\n\nimport pandas as pd\nt1 = pd.read_csv('t_1.csv')\nt2 = pd.read_csv('t_2.csv')\nt3 = pd.read_csv('t_3.csv')\nt4 = pd.read_csv('t_4.csv')"
+    "text": "3.3 Python codes\nAfter the csv files are downloaded, you may also use Python codes to load them.\n\nimport pandas as pd\nt1 = pd.read_csv('t_1.csv')\nt2 = pd.read_csv('t_2.csv')\nt3 = pd.read_csv('t_3.csv')\nt4 = pd.read_csv('t_4.csv')",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
+    ]
   },
   {
     "objectID": "contents/horse_colic.html",
     "href": "contents/horse_colic.html",
     "title": "5  Horse Colic Dataset",
     "section": "",
-    "text": "The data is from the UCI database. The data is loaded as follows. ? represents missing data.\n\nimport pandas as pd\nimport numpy as np\n\nurl = 'http://archive.ics.uci.edu/ml/machine-learning-databases/horse-colic/horse-colic.data'\ndf = pd.read_csv(url, delim_whitespace=True, header=None)\ndf = df.replace(\"?\", np.NaN)\n\nThe description of the data is listed here. We will preprocess the data according to the descrption.\n\nThe data tries to predict Column 24. Since Python index starts from 0, in our case we are interested in Column 23.\nColumn 25-27 (in our case is Column 24-26) use a special code to represent the type of lesion. For simplicity we remove these three columns.\nColumn 28 (in our case Column 27) is of no significance so we will remove it too.\nColumn 3 (in our case Column 2) is the IDs of Hospitals which should have very little impact so we will remove it too.\nWe will fill the missing values with 0.\nWe also would like to change the label from 1 and 2 to 0 and 1 for the purpose of Logistic regression.\n\nThis part should be modified if you want to improve the performance of your model.\n\ndf.fillna(0, inplace=True)\ndf.drop(columns=[2, 24, 25, 26, 27], inplace=True)\ndf[23].replace({1: 1, 2: 0}, inplace=True)\nX = df.iloc[:, :-1].to_numpy().astype(float)\ny = df[23].to_numpy().astype(int)\n\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)"
+    "text": "The data is from the UCI database. The data is loaded as follows. ? represents missing data.\n\nimport pandas as pd\nimport numpy as np\n\nurl = 'http://archive.ics.uci.edu/ml/machine-learning-databases/horse-colic/horse-colic.data'\ndf = pd.read_csv(url, delim_whitespace=True, header=None)\ndf = df.replace(\"?\", np.NaN)\n\nThe description of the data is listed here. We will preprocess the data according to the descrption.\n\nThe data tries to predict Column 24. Since Python index starts from 0, in our case we are interested in Column 23.\nColumn 25-27 (in our case is Column 24-26) use a special code to represent the type of lesion. For simplicity we remove these three columns.\nColumn 28 (in our case Column 27) is of no significance so we will remove it too.\nColumn 3 (in our case Column 2) is the IDs of Hospitals which should have very little impact so we will remove it too.\nWe will fill the missing values with 0.\nWe also would like to change the label from 1 and 2 to 0 and 1 for the purpose of Logistic regression.\n\nThis part should be modified if you want to improve the performance of your model.\n\ndf.fillna(0, inplace=True)\ndf.drop(columns=[2, 24, 25, 26, 27], inplace=True)\ndf[23].replace({1: 1, 2: 0}, inplace=True)\nX = df.iloc[:, :-1].to_numpy().astype(float)\ny = df[23].to_numpy().astype(int)\n\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Horse Colic Dataset</span>"
+    ]
   },
   {
     "objectID": "contents/iris.html",
     "href": "contents/iris.html",
     "title": "6  iris dataset",
     "section": "",
-    "text": "from sklearn import datasets\nfrom sklearn.model_selection import train_test_split\n\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)"
+    "text": "from sklearn import datasets\nfrom sklearn.model_selection import train_test_split\n\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>`iris` dataset</span>"
+    ]
   },
   {
     "objectID": "contents/kagglediabetes.html",
     "href": "contents/kagglediabetes.html",
     "title": "7  Kaggle Diabetes",
     "section": "",
-    "text": "This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective is to predict based on diagnostic measurements whether a patient has diabetes. The dataset is now transferred from Kaggle. The dataset file can be downloaded from here. After downloading it, you may put it in the working directory and use the following code to load it.\n\nimport pandas as pd\n\ndf = pd.read_csv('diabetes.csv', header=0)\n\nSeveral constraints were placed on the selection of these instances from a larger database. In particular, all patients here are females at least 21 years old of Pima Indian heritage.\n\nPregnancies: Number of times pregnant (numeric)\nGlucose: Plasma glucose concentration a 2 hours in an oral glucose tolerance test (numeric)\nBloodPressure: Diastolic blood pressure (mm Hg) (numeric)\nSkinThickness: Triceps skin fold thickness (mm) (numeric)\nInsulin: 2-Hour serum insulin (mu U/ml) (numeric)\nBMI: Body mass index (weight in kg/(height in m)^2) (numeric)\nDiabetesPedigreeFunction: Diabetes pedigree function (numeric)\nAge: Age (years) (numeric)\nOutcome: Class variable (0 or 1) (categorical)"
+    "text": "This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective is to predict based on diagnostic measurements whether a patient has diabetes. The dataset is now transferred from Kaggle. The dataset file can be downloaded from here. After downloading it, you may put it in the working directory and use the following code to load it.\n\nimport pandas as pd\n\ndf = pd.read_csv('diabetes.csv', header=0)\n\nSeveral constraints were placed on the selection of these instances from a larger database. In particular, all patients here are females at least 21 years old of Pima Indian heritage.\n\nPregnancies: Number of times pregnant (numeric)\nGlucose: Plasma glucose concentration a 2 hours in an oral glucose tolerance test (numeric)\nBloodPressure: Diastolic blood pressure (mm Hg) (numeric)\nSkinThickness: Triceps skin fold thickness (mm) (numeric)\nInsulin: 2-Hour serum insulin (mu U/ml) (numeric)\nBMI: Body mass index (weight in kg/(height in m)^2) (numeric)\nDiabetesPedigreeFunction: Diabetes pedigree function (numeric)\nAge: Age (years) (numeric)\nOutcome: Class variable (0 or 1) (categorical)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Kaggle Diabetes</span>"
+    ]
   },
   {
     "objectID": "contents/littlerockcrime.html",
     "href": "contents/littlerockcrime.html",
     "title": "8  Little Rock Crime Dataset",
     "section": "",
-    "text": "The dataset was collected from the Open Data source called little rock’s data hub. This dataset is 13 MB with 80,926 rows/observation and 14 different columns. The principal motivation behind using this dataset is to create a precise model to anticipate crimes. It can be downloaded from here.\nThe dataset could be cleaned as follows.\nData Cleaning and wraggling steps:\n\nRemove all the duplicates in the column INCIDENT_NUMBER.\nSet INCIDENT_NUMBER to be the index to uniquely identify offenses.\nFill the missing values on WEAPON_TYPE to be NO WEAPON. Fill all other missing values by 0.\nChange 1 in WEAPON_TYPE to be UNKNOWN.\nReassigned the columns to their respective types, e.g. numbers are numeric types and characters are strings.\nParse the INCIDENT_DATE to find out the year, month, day, hour and min and create columns accordingly. Note that AM/PM is taken into consideration when computating hours.\nCreate a column CRIME_TYPE based on the following rules:\n\nIf the OFFENSE_CODE contains 23, the crime is Non-Violent.\nIf the OFFENSE_DESCRIPTION contains THEFT, the crime is Non-Violent.\nAll other crimes are Violent Crime.\n\nCreate a column RISK_TYPE based on the following rules:\n\nIf the crime is Non-Violent and NO WEAPON, it is Low Risk.\nAll other crimes are High Risk."
+    "text": "The dataset was collected from the Open Data source called little rock’s data hub. This dataset is 13 MB with 80,926 rows/observation and 14 different columns. The principal motivation behind using this dataset is to create a precise model to anticipate crimes. It can be downloaded from here.\nThe dataset could be cleaned as follows.\nData Cleaning and wraggling steps:\n\nRemove all the duplicates in the column INCIDENT_NUMBER.\nSet INCIDENT_NUMBER to be the index to uniquely identify offenses.\nFill the missing values on WEAPON_TYPE to be NO WEAPON. Fill all other missing values by 0.\nChange 1 in WEAPON_TYPE to be UNKNOWN.\nReassigned the columns to their respective types, e.g. numbers are numeric types and characters are strings.\nParse the INCIDENT_DATE to find out the year, month, day, hour and min and create columns accordingly. Note that AM/PM is taken into consideration when computating hours.\nCreate a column CRIME_TYPE based on the following rules:\n\nIf the OFFENSE_CODE contains 23, the crime is Non-Violent.\nIf the OFFENSE_DESCRIPTION contains THEFT, the crime is Non-Violent.\nAll other crimes are Violent Crime.\n\nCreate a column RISK_TYPE based on the following rules:\n\nIf the crime is Non-Violent and NO WEAPON, it is Low Risk.\nAll other crimes are High Risk.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Little Rock Crime Dataset</span>"
+    ]
   },
   {
     "objectID": "contents/mnist.html",
     "href": "contents/mnist.html",
     "title": "9  MNIST dataset",
     "section": "",
-    "text": "There are several versions of the dataset.\n\ntensorflow provides the data with the original split.\n\n\nimport tensorflow.keras as keras\n(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()"
+    "text": "9.1 Huggingface Hub\nThe dataset and description can be found from the Hugging Face hub. You may use the following code to load the dataset. The installation guide of the datasets library can be found in its homepage.\nfrom datasets import load_dataset\n\nmnist_train = load_dataset(\"ylecun/mnist\", split='train', streaming=True)\nmnist_test = load_dataset(\"ylecun/mnist\", split='test', streaming=True)\nThe loaded datasets contains images. We may directly visualize it. Note that we load the dataset in streaming mode, so it is a generator and will give images one by one.\nnextdata = next(iter(mnist_train))\npic = nextdata['image']\nlabel = nextdata['label']\npic\nlabel\n\n5\nIf we want to use the data, we would like to turn them into matrices. Here we directly flatten the images into row vectors.\nimport numpy as np\n\ndef stream_to_array(streaming):\n    pic_list = []\n    label_list =[]\n    for data in streaming:\n        pic_list.append(np.array(data['image']).reshape(-1))\n        label_list.append(data['label'])\n    return np.array(pic_list), np.array(label_list)\n\nX_train, y_train = stream_to_array(mnist_train)\nX_test, y_test = stream_to_array(mnist_test)\nWe could check the size of these data.\nprint(f\"The size of training features is {X_train.shape}.\")\nprint(f\"The size of training labels is {y_train.shape}.\")\nprint(f\"The size of testing features is {X_test.shape}.\")\nprint(f\"The size of testing labels is {y_test.shape}.\")\n\nThe size of training features is (60000, 784).\nThe size of training labels is (60000,).\nThe size of testing features is (10000, 784).\nThe size of testing labels is (10000,).",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>`MNIST` dataset</span>"
+    ]
+  },
+  {
+    "objectID": "contents/mnist.html#tensorflow-version-possibly-outdated",
+    "href": "contents/mnist.html#tensorflow-version-possibly-outdated",
+    "title": "9  MNIST dataset",
+    "section": "9.2 tensorflow version (possibly outdated)",
+    "text": "9.2 tensorflow version (possibly outdated)\ntensorflow/keras provides the data with the original split. This version is not recommended since keras changed a lot during recent updates so if you use newer version the following code might not work. In addition it takes a long time to install tensorflow library.\n\nimport tensorflow.keras as keras\n(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>`MNIST` dataset</span>"
+    ]
   },
   {
     "objectID": "contents/plants_survival.html",
     "href": "contents/plants_survival.html",
     "title": "10  Plant survival data with salt and microbe treatments",
     "section": "",
-    "text": "This dataset is supported by DART SEED grant. It is provided by Dr. Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from here.\nWe could use the following code to read the data.\n\nimport pandas as pd\n\ndf = pd.read_excel('assests/datasets/plants.xlsx', engine='openpyxl', sheet_name='data')\n\nThere are a few missing values. The missing values in Outcome_after 12 months are all dead. These are not recorded as dead because the cause of the death is more complicated and needs to be studied separatedly. In our case we could simply fill it with dead.\nThere are two more missing values in Stem diameter. For simplicity we drop them directly.\n\ndf['Outcome_after 12 months'].fillna('dead', inplace=True)\ndf = df.dropna()\n\nThen we would like to transform the data. Here are the rules.\n\nEndophyte: I+->1, I-->-1\nTreatment: Salt->1, Fresh->0\nTree_Replicate: T1->1, T2->2, T3->3\nOutcome_after 12 months: survived->1, dead->0\n\nColumn SN will be dropped.\nFinally we put these together to get the features X and the label y.\n\ndf['Endophyte '] = df['Endophyte '].map({'I+': 1, 'I-': -1})\ndf['Treatment'] = df['Treatment'].map({'Fresh': 0, 'Salt': 1})\ndf['Tree_Replicate'] = df['Tree_Replicate'].str[1].astype(int)\ndf['Outcome_after 12 months'] = df['Outcome_after 12 months'].map({'survived': 1, 'dead': 0})\n\nX = df.iloc[:, 1: -1].to_numpy()\ny = df['Outcome_after 12 months'].to_numpy()"
+    "text": "This dataset is supported by DART SEED grant. It is provided by Dr. Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from here.\nWe could use the following code to read the data.\n\nimport pandas as pd\n\ndf = pd.read_excel('assests/datasets/plants.xlsx', engine='openpyxl', sheet_name='data')\n\nThere are a few missing values. The missing values in Outcome_after 12 months are all dead. These are not recorded as dead because the cause of the death is more complicated and needs to be studied separatedly. In our case we could simply fill it with dead.\nThere are two more missing values in Stem diameter. For simplicity we drop them directly.\n\ndf['Outcome_after 12 months'].fillna('dead', inplace=True)\ndf = df.dropna()\n\nThen we would like to transform the data. Here are the rules.\n\nEndophyte: I+-&gt;1, I--&gt;-1\nTreatment: Salt-&gt;1, Fresh-&gt;0\nTree_Replicate: T1-&gt;1, T2-&gt;2, T3-&gt;3\nOutcome_after 12 months: survived-&gt;1, dead-&gt;0\n\nColumn SN will be dropped.\nFinally we put these together to get the features X and the label y.\n\ndf['Endophyte '] = df['Endophyte '].map({'I+': 1, 'I-': -1})\ndf['Treatment'] = df['Treatment'].map({'Fresh': 0, 'Salt': 1})\ndf['Tree_Replicate'] = df['Tree_Replicate'].str[1].astype(int)\ndf['Outcome_after 12 months'] = df['Outcome_after 12 months'].map({'survived': 1, 'dead': 0})\n\nX = df.iloc[:, 1: -1].to_numpy()\ny = df['Outcome_after 12 months'].to_numpy()",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Plant survival data with salt and microbe treatments</span>"
+    ]
   },
   {
     "objectID": "contents/QSR.html",
     "href": "contents/QSR.html",
     "title": "11  QSR",
     "section": "",
-    "text": "Here is the dataset QSR."
+    "text": "Here is the dataset QSR.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>QSR</span>"
+    ]
   },
   {
-    "objectID": "contents/random.html#make_moon-dataset",
-    "href": "contents/random.html#make_moon-dataset",
+    "objectID": "contents/random.html",
+    "href": "contents/random.html",
     "title": "12  Randomly generated datasets",
-    "section": "12.1 make_moon dataset",
-    "text": "12.1 make_moon dataset\nThis is used to generate two interleaving half circles.\n\nfrom sklearn.datasets import make_moons\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_moons(n_samples=10000, noise=0.4, random_state=42)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)"
+    "section": "",
+    "text": "12.1 make_moon dataset\nThis is used to generate two interleaving half circles.\nfrom sklearn.datasets import make_moons\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_moons(n_samples=10000, noise=0.4, random_state=42)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Randomly generated datasets</span>"
+    ]
   },
   {
     "objectID": "contents/random.html#make_gaussian_quantiles-dataset",
     "href": "contents/random.html#make_gaussian_quantiles-dataset",
     "title": "12  Randomly generated datasets",
     "section": "12.2 make_gaussian_quantiles dataset",
-    "text": "12.2 make_gaussian_quantiles dataset\nThis is a generated isotropic Gaussian and label samples by quantile.\nThe following code are from this page. It is used to generate a relative complex dataset by combining two datesets together.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\nimport numpy as np\n\nX1, y1 = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                                 n_classes=2, random_state=1)\nX2, y2 = make_gaussian_quantiles(mean=(3, 3), cov=1.5, n_samples=300,\n                                 n_features=2, n_classes=2, random_state=1)\nX = np.concatenate((X1, X2))\ny = np.concatenate((y1, -y2 + 1))\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n\nIt can also be used to generate multiclass dataset.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                               n_classes=4, random_state=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)"
+    "text": "12.2 make_gaussian_quantiles dataset\nThis is a generated isotropic Gaussian and label samples by quantile.\nThe following code are from this page. It is used to generate a relative complex dataset by combining two datesets together.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\nimport numpy as np\n\nX1, y1 = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                                 n_classes=2, random_state=1)\nX2, y2 = make_gaussian_quantiles(mean=(3, 3), cov=1.5, n_samples=300,\n                                 n_features=2, n_classes=2, random_state=1)\nX = np.concatenate((X1, X2))\ny = np.concatenate((y1, -y2 + 1))\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n\nIt can also be used to generate multiclass dataset.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                               n_classes=4, random_state=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Randomly generated datasets</span>"
+    ]
   },
   {
     "objectID": "contents/random.html#make_classification",
     "href": "contents/random.html#make_classification",
     "title": "12  Randomly generated datasets",
     "section": "12.3 make_classification",
-    "text": "12.3 make_classification\nThis will create a multiclass dataset. Without shuffling, X horizontally stacks features in the following order: the primary n_informative features, followed by n_redundant linear combinations of the informative features, followed by n_repeated duplicates, drawn randomly with replacement from the informative and redundant features.\nFor more details please see the official document.\n\nfrom sklearn.datasets import make_classification\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_classification(n_samples=1000, n_features=10, n_informative=2, n_redundant=2, n_repeated=2, n_classes=3, n_clusters_per_class=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)"
+    "text": "12.3 make_classification\nThis will create a multiclass dataset. Without shuffling, X horizontally stacks features in the following order: the primary n_informative features, followed by n_redundant linear combinations of the informative features, followed by n_repeated duplicates, drawn randomly with replacement from the informative and redundant features.\nFor more details please see the official document.\n\nfrom sklearn.datasets import make_classification\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_classification(n_samples=1000, n_features=10, n_informative=2, n_redundant=2, n_repeated=2, n_classes=3, n_clusters_per_class=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Randomly generated datasets</span>"
+    ]
   },
   {
     "objectID": "contents/titanic.html",
     "href": "contents/titanic.html",
     "title": "13  titanic dataset",
     "section": "",
-    "text": "This is the famuous Kaggle101 dataset. The original data can be download from the Kaggle page. You may also download the training set and the test data by click the link.\n\nimport pandas as pd\ndftrain = pd.read_csv('train.csv')\ndftest = pd.read_csv('test.csv')\n\nThe original is a little bit messy with missing values and mix of numeric data and string data. The above code reads the data into a DataFrame. The following code does some basic of preprocess. This part should be modified if you want to improve the performance of your model.\n\nOnly select columns: Pclass, Sex, Age, SibSp, Parch, Fare. That is to say, Name, Cabin and Embarked are dropped.\nFill the missing values in column Age and Fare by 0.\nReplace the column Sex by the following map: {'male': 0, 'female': 1}.\n\n\nimport pandas as pd\nimport numpy as np\n\ndef getnp(df):\n    df['mapSex'] = df['Sex'].map(lambda x: {'male': 0, 'female': 1}[x])\n    dfx = df[['Pclass', 'mapSex', 'Age', 'SibSp', 'Parch', 'Fare']].copy()\n    dfx['Fare'].fillna(0, inplace=True)\n    dfx['Age'].fillna(0, inplace=True)\n    if 'Survived' in df.columns:\n        y = df['Survived'].to_numpy()\n    else:\n        y = None\n    X = dfx.to_numpy()\n    return (X, y)\n\nX_train, y_train = getnp(dftrain)\nX_test, _ = getnp(dftest)\n\nFor the purpose of submitting to Kaggle, after getting y_pred, we could use the following file to prepare for the submission file.\n\ndef getdf(df, y):\n    df['Survived'] = y\n    return df[['PassengerId', 'Survived']]\n\ngetdf(dftest, y_pred).to_csv('result.csv')"
+    "text": "This is the famuous Kaggle101 dataset. The original data can be download from the Kaggle page. You may also download the training set and the test data by click the link.\n\nimport pandas as pd\ndftrain = pd.read_csv('train.csv')\ndftest = pd.read_csv('test.csv')\n\nThe original is a little bit messy with missing values and mix of numeric data and string data. The above code reads the data into a DataFrame. The following code does some basic of preprocess. This part should be modified if you want to improve the performance of your model.\n\nOnly select columns: Pclass, Sex, Age, SibSp, Parch, Fare. That is to say, Name, Cabin and Embarked are dropped.\nFill the missing values in column Age and Fare by 0.\nReplace the column Sex by the following map: {'male': 0, 'female': 1}.\n\n\nimport pandas as pd\nimport numpy as np\n\ndef getnp(df):\n    df['mapSex'] = df['Sex'].map(lambda x: {'male': 0, 'female': 1}[x])\n    dfx = df[['Pclass', 'mapSex', 'Age', 'SibSp', 'Parch', 'Fare']].copy()\n    dfx['Fare'].fillna(0, inplace=True)\n    dfx['Age'].fillna(0, inplace=True)\n    if 'Survived' in df.columns:\n        y = df['Survived'].to_numpy()\n    else:\n        y = None\n    X = dfx.to_numpy()\n    return (X, y)\n\nX_train, y_train = getnp(dftrain)\nX_test, _ = getnp(dftest)\n\nFor the purpose of submitting to Kaggle, after getting y_pred, we could use the following file to prepare for the submission file.\n\ndef getdf(df, y):\n    df['Survived'] = y\n    return df[['PassengerId', 'Survived']]\n\ngetdf(dftest, y_pred).to_csv('result.csv')",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>`titanic` dataset</span>"
+    ]
   }
 ]
