@@ -240,7 +240,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#huggingface-hub" id="toc-huggingface-hub" class="nav-link active" data-scroll-target="#huggingface-hub"><span class="header-section-number">9.1</span> Huggingface Hub</a></li>
+  <li><a href="#huggingface-hub" id="toc-huggingface-hub" class="nav-link active" data-scroll-target="#huggingface-hub"><span class="header-section-number">9.1</span> Huggingface Hub</a>
+  <ul class="collapse">
+  <li><a href="#dataset-mode" id="toc-dataset-mode" class="nav-link" data-scroll-target="#dataset-mode"><span class="header-section-number">9.1.1</span> Dataset mode</a></li>
+  <li><a href="#streaming-mode" id="toc-streaming-mode" class="nav-link" data-scroll-target="#streaming-mode"><span class="header-section-number">9.1.2</span> Streaming mode</a></li>
+  </ul></li>
   <li><a href="#tensorflow-version-possibly-outdated" id="toc-tensorflow-version-possibly-outdated" class="nav-link" data-scroll-target="#tensorflow-version-possibly-outdated"><span class="header-section-number">9.2</span> <code>tensorflow</code> version (possibly outdated)</a></li>
   </ul>
 </nav>
@@ -271,67 +275,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="huggingface-hub" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="huggingface-hub"><span class="header-section-number">9.1</span> Huggingface Hub</h2>
 <p>The dataset and description can be found from the <a href="https://huggingface.co/datasets/ylecun/mnist">Hugging Face hub</a>. You may use the following code to load the dataset. The installation guide of the <code>datasets</code> library can be found in its <a href="https://huggingface.co/docs/datasets/en/installation">homepage</a>.</p>
-<div id="657b23fb" class="cell" data-execution_count="1">
+<section id="dataset-mode" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="dataset-mode"><span class="header-section-number">9.1.1</span> Dataset mode</h3>
+<p>We may also load it directly in dataset mode.</p>
+<div id="caa837ad" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> datasets <span class="im">import</span> load_dataset</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>mnist_train <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'train'</span>, streaming<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>mnist_test <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'test'</span>, streaming<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>mnist_train <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'train'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>mnist_test <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'test'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>mnist_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>Dataset({
+    features: ['image', 'label'],
+    num_rows: 60000
+})</code></pre>
 </div>
-<p>The loaded datasets contains images. We may directly visualize it. Note that we load the dataset in streaming mode, so it is a generator and will give images one by one.</p>
-<div id="f8cdbc2c" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>nextdata <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(mnist_train))</span>
-<span id="cb2-2"><a href="#cb2-2"></a>pic <span class="op">=</span> nextdata[<span class="st">'image'</span>]</span>
-<span id="cb2-3"><a href="#cb2-3"></a>label <span class="op">=</span> nextdata[<span class="st">'label'</span>]</span>
-<span id="cb2-4"><a href="#cb2-4"></a>pic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+</div>
+<div id="c7d77ba8" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>mnist_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Dataset({
+    features: ['image', 'label'],
+    num_rows: 10000
+})</code></pre>
+</div>
+</div>
+<p>The data point can be accessed by</p>
+<div id="d00dc99e" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>mnist_train[<span class="dv">0</span>][<span class="st">'image'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 <figure class="figure">
-<p><img src="mnist_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="mnist_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="9ce1c19d" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="f8adc958" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>mnist_train[<span class="dv">0</span>][<span class="st">'label'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>5</code></pre>
 </div>
 </div>
-<p>If we want to use the data, we would like to turn them into matrices. Here we directly flatten the images into row vectors.</p>
-<div id="bed85b8e" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">def</span> stream_to_array(streaming):</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    pic_list <span class="op">=</span> []</span>
-<span id="cb5-5"><a href="#cb5-5"></a>    label_list <span class="op">=</span>[]</span>
-<span id="cb5-6"><a href="#cb5-6"></a>    <span class="cf">for</span> data <span class="kw">in</span> streaming:</span>
-<span id="cb5-7"><a href="#cb5-7"></a>        pic_list.append(np.array(data[<span class="st">'image'</span>]).reshape(<span class="op">-</span><span class="dv">1</span>))</span>
-<span id="cb5-8"><a href="#cb5-8"></a>        label_list.append(data[<span class="st">'label'</span>])</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="cf">return</span> np.array(pic_list), np.array(label_list)</span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a>X_train, y_train <span class="op">=</span> stream_to_array(mnist_train)</span>
-<span id="cb5-12"><a href="#cb5-12"></a>X_test, y_test <span class="op">=</span> stream_to_array(mnist_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We could check the size of these data.</p>
-<div id="80bdeaad" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">print</span>(<span class="ss">f"The size of training features is </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">."</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">print</span>(<span class="ss">f"The size of training labels is </span><span class="sc">{</span>y_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">."</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="bu">print</span>(<span class="ss">f"The size of testing features is </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">."</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="bu">print</span>(<span class="ss">f"The size of testing labels is </span><span class="sc">{</span>y_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The size of training features is (60000, 784).
-The size of training labels is (60000,).
-The size of testing features is (10000, 784).
-The size of testing labels is (10000,).</code></pre>
+<div id="76607e3a" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>mnist_train[<span class="st">'image'</span>][:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>[&lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;,
+ &lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;,
+ &lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;]</code></pre>
 </div>
 </div>
+<div id="c2071322" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>mnist_train[<span class="st">'label'</span>][:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>[5, 0, 4]</code></pre>
+</div>
+</div>
+<p>Note that you may either slice the dataset, or slice its field (e.g.&nbsp;image or label).</p>
+<p>Since we would like to work with matrices instead of the “image” object, we could use <code>map</code> to transform them.</p>
+<div id="7fb2be3d" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">def</span> pil_to_array(data):</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    data[<span class="st">'image'</span>] <span class="op">=</span> np.array(data[<span class="st">'image'</span>]).reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="cf">return</span> data</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>mnist_train_processed <span class="op">=</span> mnist_train.<span class="bu">map</span>(pil_to_array)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>mnist_test_processed <span class="op">=</span> mnist_test.<span class="bu">map</span>(pil_to_array)</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a>X_train <span class="op">=</span> np.array(mnist_train_processed[<span class="st">'image'</span>])</span>
+<span id="cb12-11"><a href="#cb12-11"></a>y_train <span class="op">=</span> np.array(mnist_train_processed[<span class="st">'label'</span>]).reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb12-12"><a href="#cb12-12"></a>X_test <span class="op">=</span> np.array(mnist_test_processed[<span class="st">'image'</span>])</span>
+<span id="cb12-13"><a href="#cb12-13"></a>y_test <span class="op">=</span> np.array(mnist_test_processed[<span class="st">'label'</span>]).reshape(<span class="op">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="streaming-mode" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="streaming-mode"><span class="header-section-number">9.1.2</span> Streaming mode</h3>
+<div id="f91bfe92" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>mnist_train_streaming <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'train'</span>, streaming<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>mnist_test_streaming <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'test'</span>, streaming<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The loaded datasets contains images. We may directly visualize it. Note that we load the dataset in streaming mode, so it is a generator and will give images one by one.</p>
+<div id="2f64274a" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>nextdata <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(mnist_train))</span>
+<span id="cb14-2"><a href="#cb14-2"></a>pic <span class="op">=</span> nextdata[<span class="st">'image'</span>]</span>
+<span id="cb14-3"><a href="#cb14-3"></a>label <span class="op">=</span> nextdata[<span class="st">'label'</span>]</span>
+<span id="cb14-4"><a href="#cb14-4"></a>pic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+<figure class="figure">
+<p><img src="mnist_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="4ab12fa4" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>5</code></pre>
+</div>
+</div>
+<p>If we first get the dataset mode, it could be transformed into the streaming mode.</p>
+<div id="1ac772f2" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>mnist_train <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'train'</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>iter_train <span class="op">=</span> mnist_train.to_iterable_dataset()</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a>nextdata <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(iter_train))</span>
+<span id="cb17-5"><a href="#cb17-5"></a>pic <span class="op">=</span> nextdata[<span class="st">'image'</span>]</span>
+<span id="cb17-6"><a href="#cb17-6"></a>pic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+<figure class="figure">
+<p><img src="mnist_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We could also apply the transformations to the streaming data.</p>
+<div id="8bfc365c" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">def</span> pil_to_array(data):</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    data[<span class="st">'image'</span>] <span class="op">=</span> np.array(data[<span class="st">'image'</span>]).reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="cf">return</span> data</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    </span>
+<span id="cb18-7"><a href="#cb18-7"></a>mnist_train <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'train'</span>)</span>
+<span id="cb18-8"><a href="#cb18-8"></a>mnist_test <span class="op">=</span> load_dataset(<span class="st">"ylecun/mnist"</span>, split<span class="op">=</span><span class="st">'test'</span>)</span>
+<span id="cb18-9"><a href="#cb18-9"></a>iter_train <span class="op">=</span> mnist_train.to_iterable_dataset().<span class="bu">map</span>(pil_to_array)</span>
+<span id="cb18-10"><a href="#cb18-10"></a>iter_test <span class="op">=</span> mnist_test.to_iterable_dataset().<span class="bu">map</span>(pil_to_array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="tensorflow-version-possibly-outdated" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="tensorflow-version-possibly-outdated"><span class="header-section-number">9.2</span> <code>tensorflow</code> version (possibly outdated)</h2>
 <p><code>tensorflow</code>/<code>keras</code> provides the data with the original split. This version is not recommended since <code>keras</code> changed a lot during recent updates so if you use newer version the following code might not work. In addition it takes a long time to install <code>tensorflow</code> library.</p>
-<div id="9d08b6e6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> tensorflow.keras <span class="im">as</span> keras</span>
-<span id="cb8-2"><a href="#cb8-2"></a>(X_train, y_train), (X_test, y_test) <span class="op">=</span> keras.datasets.mnist.load_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0278f018" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="im">import</span> tensorflow.keras <span class="im">as</span> keras</span>
+<span id="cb19-2"><a href="#cb19-2"></a>(X_train, y_train), (X_test, y_test) <span class="op">=</span> keras.datasets.mnist.load_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
