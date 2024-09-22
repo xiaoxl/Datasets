@@ -7,13 +7,70 @@ There are several versions of the dataset (that almost all machine learning libr
 ## Huggingface Hub
 The dataset and description can be found from the [Hugging Face hub](https://huggingface.co/datasets/ylecun/mnist). You may use the following code to load the dataset. The installation guide of the `datasets` library can be found in its [homepage](https://huggingface.co/docs/datasets/en/installation).
 
+
+### Dataset mode
+
+We may also load it directly in dataset mode. 
+
+```{python}
+from datasets import load_dataset
+
+mnist_train = load_dataset("ylecun/mnist", split='train')
+mnist_test = load_dataset("ylecun/mnist", split='test')
+
+mnist_train
+```
+
+```{python}
+mnist_test
+```
+
+The data point can be accessed by
+
+
+
+```{python}
+mnist_train[0]['image']
+```
+
+```{python}
+mnist_train[0]['label']
+```
+```{python}
+mnist_train['image'][:3]
+```
+```{python}
+mnist_train['label'][:3]
+```
+Note that you may either slice the dataset, or slice its field (e.g. image or label).
+
+Since we would like to work with matrices instead of the "image" object, we could use `map` to transform them.
+
+```{python}
+#| eval: false
+import numpy as np
+
+def pil_to_array(data):
+    data['image'] = np.array(data['image']).reshape(1, -1)
+    return data
+
+mnist_train_processed = mnist_train.map(pil_to_array)
+mnist_test_processed = mnist_test.map(pil_to_array)
+
+X_train = np.array(mnist_train_processed['image'])
+y_train = np.array(mnist_train_processed['label']).reshape(-1)
+X_test = np.array(mnist_test_processed['image'])
+y_test = np.array(mnist_test_processed['label']).reshape(-1)
+```
+
+
+### Streaming mode
+
 ```{python}
 #| warning: false
 #| output: false
-from datasets import load_dataset
-
-mnist_train = load_dataset("ylecun/mnist", split='train', streaming=True)
-mnist_test = load_dataset("ylecun/mnist", split='test', streaming=True)
+mnist_train_streaming = load_dataset("ylecun/mnist", split='train', streaming=True)
+mnist_test_streaming = load_dataset("ylecun/mnist", split='test', streaming=True)
 ```
 The loaded datasets contains images. We may directly visualize it. Note that we load the dataset in streaming mode, so it is a generator and will give images one by one.
 
@@ -27,32 +84,32 @@ pic
 ```{python}
 label
 ```
+If we first get the dataset mode, it could be transformed into the streaming mode.
 
-If we want to use the data, we would like to turn them into matrices. Here we directly flatten the images into row vectors.
+```{python}
+mnist_train = load_dataset("ylecun/mnist", split='train')
+iter_train = mnist_train.to_iterable_dataset()
+
+nextdata = next(iter(iter_train))
+pic = nextdata['image']
+pic
+```
+We could also apply the transformations to the streaming data.
 
 ```{python}
 import numpy as np
 
-def stream_to_array(streaming):
-    pic_list = []
-    label_list =[]
-    for data in streaming:
-        pic_list.append(np.array(data['image']).reshape(-1))
-        label_list.append(data['label'])
-    return np.array(pic_list), np.array(label_list)
-
-X_train, y_train = stream_to_array(mnist_train)
-X_test, y_test = stream_to_array(mnist_test)
+def pil_to_array(data):
+    data['image'] = np.array(data['image']).reshape(1, -1)
+    return data
+    
+mnist_train = load_dataset("ylecun/mnist", split='train')
+mnist_test = load_dataset("ylecun/mnist", split='test')
+iter_train = mnist_train.to_iterable_dataset().map(pil_to_array)
+iter_test = mnist_test.to_iterable_dataset().map(pil_to_array)
 ```
 
-We could check the size of these data.
 
-```{python}
-print(f"The size of training features is {X_train.shape}.")
-print(f"The size of training labels is {y_train.shape}.")
-print(f"The size of testing features is {X_test.shape}.")
-print(f"The size of testing labels is {y_test.shape}.")
-```
 
 
 ## `tensorflow` version (possibly outdated)
