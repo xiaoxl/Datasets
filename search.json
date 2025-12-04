@@ -10,183 +10,223 @@
     ]
   },
   {
+    "objectID": "contents/adult.html",
+    "href": "contents/adult.html",
+    "title": "1  Adult income dataset",
+    "section": "",
+    "text": "1.1 Reading data\nThis dataset is from UCI machine learning repository. The dataset is about the annual income of an individual and the purpose of the project is to predict whether the annual income exceeds $50K/year or not.\nimport pandas as pd\n\ntrain_df = pd.read_csv(\"assests/datasets/adult/adult.data\", na_values=\" ?\", header=None).dropna()\ntest_df = pd.read_csv(\"assests/datasets/adult/adult.test\", na_values=\" ?\", skiprows=[0], header=None).dropna()\n\ncolnames = [\n    \"age\",\n    \"workclass\",\n    \"fnlwgt\",\n    \"education\",\n    \"education-num\",\n    \"marital-status\",\n    \"occupation\",\n    \"relationship\",\n    \"race\",\n    \"sex\",\n    \"capital-gain\",\n    \"capital-loss\",\n    \"hours-per-week\",\n    \"native-country\",\n    \"income\",\n]\n\ntrain_df.columns = colnames\ntest_df.columns = colnames",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Adult income dataset</span>"
+    ]
+  },
+  {
+    "objectID": "contents/adult.html#reading-data",
+    "href": "contents/adult.html#reading-data",
+    "title": "1  Adult income dataset",
+    "section": "",
+    "text": "There are two dataset files. adult.data is the training dataset and adult.test is the test dataset.\nBoth files don’t have header lines. So we need to manually specify column names.\nThe first line of adult.test should be skipped since it is irrelevent to our dataset.\nIn this dataset missing values are marked as ?. We would like to remove all missing values.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Adult income dataset</span>"
+    ]
+  },
+  {
+    "objectID": "contents/adult.html#preprocessing",
+    "href": "contents/adult.html#preprocessing",
+    "title": "1  Adult income dataset",
+    "section": "1.2 Preprocessing",
+    "text": "1.2 Preprocessing\nThere are 15 columns. The last column is income which has two string values ' &gt;50K' and ' &lt;=50K'. The rest variables are descibed below.\n\nage: continuous\nworkclass: 8 categories\nfnlwgt: continuous\neducation: 16 categories\neducation-num: continuous\nmarital-status: 7 categories\noccupation: 14 categories\nrelationship: 6 categories\nrace: 5 categories\nsex: 2 categories\ncapital-gain: continuous\ncapital-loss: continuous\nhours-per-week: continuous\nnative-country: 41 categories\n\nSo for features we need to normalize numerical columns and apply one-hot encoding for categorical columns. For labels, we need to convert ' &gt;50K' and ' &lt;=50K' into 1 and 0.\n\n1.2.1 Split the label column\n\nX_train = train_df.drop(\"income\", axis=1)\ny_train = (train_df[\"income\"] == \" &gt;50K\").astype(int)\nX_test = test_df.drop(\"income\", axis=1) \ny_test = (test_df[\"income\"] == \" &gt;50K\").astype(int)\n\n\n\n1.2.2 Normalize\n\nfrom sklearn.preprocessing import MinMaxScaler\n\nnumeric_features = [\n    \"age\",\n    \"fnlwgt\",\n    \"education-num\",\n    \"capital-gain\",\n    \"capital-loss\",\n    \"hours-per-week\",\n]\nmm = MinMaxScaler()\n\nnumeric_X_train = mm.fit_transform(X_train[numeric_features])\nnumeric_X_test = mm.transform(X_test[numeric_features])\n\n\n\n1.2.3 One-hot encoding\n\nfrom sklearn.preprocessing import OneHotEncoder\n\ncategorical_features = [\n    \"workclass\",\n    \"education\",\n    \"marital-status\",\n    \"occupation\",\n    \"relationship\",\n    \"race\",\n    \"sex\",\n    \"native-country\",\n]\nohe = OneHotEncoder(handle_unknown=\"ignore\")\n\ncategorical_X_train = ohe.fit_transform(X_train[categorical_features])\ncategorical_X_test = ohe.transform(X_test[categorical_features])\n\nThe onehot decoding of the categorical columns is relative large, and is therefore stored as a sparse matrix (which is an object different from numpy array). So we need to convert it back to numpy array.\n\nimport numpy as np\n\ncategorical_X_train = categorical_X_train.toarray()\ncategorical_X_test = categorical_X_test.toarray()\n\n\n\n1.2.4 Concatenate\n\nX_train_norm = np.concatenate([numeric_X_train, categorical_X_train], axis=1)\nX_test_norm = np.concatenate([numeric_X_test, categorical_X_test], axis=1)\n\n\n\n1.2.5 Composer\nThe best pratice for the above operations is to write a composer.\n\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import StandardScaler, OneHotEncoder\n\npreprocess = ColumnTransformer(\n    transformers=[\n        (\"num\", StandardScaler(), numeric_features),\n        (\"cat\", OneHotEncoder(handle_unknown=\"ignore\"), categorical_features),\n    ]\n)\n\nX_train_norm = preprocess.fit_transform(X_train)\nX_test_norm = preprocess.transform(X_test)\n\nThe results here are also sparse matrix. So we need to convert it back to dense array.\n\nX_train_norm = X_train_norm.toarray()\nX_test_norm = X_test_norm.toarray()",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Adult income dataset</span>"
+    ]
+  },
+  {
+    "objectID": "contents/adult.html#dataset-class",
+    "href": "contents/adult.html#dataset-class",
+    "title": "1  Adult income dataset",
+    "section": "1.3 Dataset class",
+    "text": "1.3 Dataset class\nWe build a Dataset class in order to use it for a nerual network.\n\nimport torch\nfrom torch.utils.data import Dataset\n\nclass AdultDataset(Dataset):\n    def __init__(self, X, y):\n        self.X = torch.tensor(X, dtype=torch.float32)\n        self.y = torch.tensor(y, dtype=torch.long).reshape(-1, 1)\n\n\n    def __len__(self):\n        return len(self.X)\n\n    def __getitem__(self, idx):\n        return self.X[idx], self.y[idx]\n\n\ntrain_ds = AdultDataset(X_train_norm, y_train)\ntest_ds = AdultDataset(X_test_norm, y_test)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Adult income dataset</span>"
+    ]
+  },
+  {
     "objectID": "contents/breast_cancer.html",
     "href": "contents/breast_cancer.html",
-    "title": "1  breast_cancer dataset",
+    "title": "2  breast_cancer dataset",
     "section": "",
     "text": "from sklearn.datasets import load_breast_cancer\nfrom sklearn.model_selection import train_test_split\n\ncancer = load_breast_cancer()\nX = cancer.data\ny = cancer.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>`breast_cancer` dataset</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>`breast_cancer` dataset</span>"
     ]
   },
   {
     "objectID": "contents/datingtestset.html",
     "href": "contents/datingtestset.html",
-    "title": "2  Dating dataset",
+    "title": "3  Dating dataset",
     "section": "",
     "text": "The data file can be downloaded from here.\n\nimport numpy as np\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\n\ndf = pd.read_csv('assests/datasets/datingTestSet2.txt', sep='\\t', header=None)\nX = np.array(df[[0, 1, 2]])\ny = np.array(df[3])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dating dataset</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dating dataset</span>"
     ]
   },
   {
     "objectID": "contents/ds4psy.html",
     "href": "contents/ds4psy.html",
-    "title": "3  Datasets in ds4psy",
+    "title": "4  Datasets in ds4psy",
     "section": "",
-    "text": "3.1 csv files\nThe four tibbles can be downloaded directly from here, as csv files.\nt_1.csv\nt_2.csv\nt_3.csv\nt_4.csv",
+    "text": "4.1 csv files\nThe four tibbles can be downloaded directly from here, as csv files.\nt_1.csv\nt_2.csv\nt_3.csv\nt_4.csv",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
     ]
   },
   {
     "objectID": "contents/ds4psy.html#r-codes",
     "href": "contents/ds4psy.html#r-codes",
-    "title": "3  Datasets in ds4psy",
-    "section": "3.2 R codes",
-    "text": "3.2 R codes\nds4psy is a R package. There are several dataset in the package. The R package can be installed directly.\ninstall.packages(\"ds4psy\")\nAfter load the package, the four tibbles will be directly loaded.\nlibrary(ds4psy)\nt_1\nt_2\nt_3\nt_4",
+    "title": "4  Datasets in ds4psy",
+    "section": "4.2 R codes",
+    "text": "4.2 R codes\nds4psy is a R package. There are several dataset in the package. The R package can be installed directly.\ninstall.packages(\"ds4psy\")\nAfter load the package, the four tibbles will be directly loaded.\nlibrary(ds4psy)\nt_1\nt_2\nt_3\nt_4",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
     ]
   },
   {
     "objectID": "contents/ds4psy.html#python-codes",
     "href": "contents/ds4psy.html#python-codes",
-    "title": "3  Datasets in ds4psy",
-    "section": "3.3 Python codes",
-    "text": "3.3 Python codes\nAfter the csv files are downloaded, you may also use Python codes to load them.\n\nimport pandas as pd\nt1 = pd.read_csv('t_1.csv')\nt2 = pd.read_csv('t_2.csv')\nt3 = pd.read_csv('t_3.csv')\nt4 = pd.read_csv('t_4.csv')",
+    "title": "4  Datasets in ds4psy",
+    "section": "4.3 Python codes",
+    "text": "4.3 Python codes\nAfter the csv files are downloaded, you may also use Python codes to load them.\n\nimport pandas as pd\nt1 = pd.read_csv('t_1.csv')\nt2 = pd.read_csv('t_2.csv')\nt3 = pd.read_csv('t_3.csv')\nt4 = pd.read_csv('t_4.csv')",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Datasets in `ds4psy`</span>"
     ]
   },
   {
     "objectID": "contents/horse_colic.html",
     "href": "contents/horse_colic.html",
-    "title": "5  Horse Colic Dataset",
+    "title": "6  Horse Colic Dataset",
     "section": "",
     "text": "The data is from the UCI database. The data is loaded as follows. ? represents missing data.\n\nimport pandas as pd\nimport numpy as np\n\nurl = 'http://archive.ics.uci.edu/ml/machine-learning-databases/horse-colic/horse-colic.data'\ndf = pd.read_csv(url, delim_whitespace=True, header=None)\ndf = df.replace(\"?\", np.NaN)\n\nThe description of the data is listed here. We will preprocess the data according to the descrption.\n\nThe data tries to predict Column 24. Since Python index starts from 0, in our case we are interested in Column 23.\nColumn 25-27 (in our case is Column 24-26) use a special code to represent the type of lesion. For simplicity we remove these three columns.\nColumn 28 (in our case Column 27) is of no significance so we will remove it too.\nColumn 3 (in our case Column 2) is the IDs of Hospitals which should have very little impact so we will remove it too.\nWe will fill the missing values with 0.\nWe also would like to change the label from 1 and 2 to 0 and 1 for the purpose of Logistic regression.\n\nThis part should be modified if you want to improve the performance of your model.\n\ndf.fillna(0, inplace=True)\ndf.drop(columns=[2, 24, 25, 26, 27], inplace=True)\ndf[23].replace({1: 1, 2: 0}, inplace=True)\nX = df.iloc[:, :-1].to_numpy().astype(float)\ny = df[23].to_numpy().astype(int)\n\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Horse Colic Dataset</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Horse Colic Dataset</span>"
     ]
   },
   {
     "objectID": "contents/iris.html",
     "href": "contents/iris.html",
-    "title": "6  iris dataset",
+    "title": "7  iris dataset",
     "section": "",
     "text": "from sklearn import datasets\nfrom sklearn.model_selection import train_test_split\n\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>`iris` dataset</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>`iris` dataset</span>"
     ]
   },
   {
     "objectID": "contents/kagglediabetes.html",
     "href": "contents/kagglediabetes.html",
-    "title": "7  Kaggle Diabetes",
+    "title": "8  Kaggle Diabetes",
     "section": "",
     "text": "This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective is to predict based on diagnostic measurements whether a patient has diabetes. The dataset is now transferred from Kaggle. The dataset file can be downloaded from here. After downloading it, you may put it in the working directory and use the following code to load it.\n\nimport pandas as pd\n\ndf = pd.read_csv('diabetes.csv', header=0)\n\nSeveral constraints were placed on the selection of these instances from a larger database. In particular, all patients here are females at least 21 years old of Pima Indian heritage.\n\nPregnancies: Number of times pregnant (numeric)\nGlucose: Plasma glucose concentration a 2 hours in an oral glucose tolerance test (numeric)\nBloodPressure: Diastolic blood pressure (mm Hg) (numeric)\nSkinThickness: Triceps skin fold thickness (mm) (numeric)\nInsulin: 2-Hour serum insulin (mu U/ml) (numeric)\nBMI: Body mass index (weight in kg/(height in m)^2) (numeric)\nDiabetesPedigreeFunction: Diabetes pedigree function (numeric)\nAge: Age (years) (numeric)\nOutcome: Class variable (0 or 1) (categorical)",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Kaggle Diabetes</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Kaggle Diabetes</span>"
     ]
   },
   {
     "objectID": "contents/littlerockcrime.html",
     "href": "contents/littlerockcrime.html",
-    "title": "8  Little Rock Crime Dataset",
+    "title": "9  Little Rock Crime Dataset",
     "section": "",
     "text": "The dataset was collected from the Open Data source called little rock’s data hub. This dataset is 13 MB with 80,926 rows/observation and 14 different columns. The principal motivation behind using this dataset is to create a precise model to anticipate crimes. It can be downloaded from here.\nThe dataset could be cleaned as follows.\nData Cleaning and wraggling steps:\n\nRemove all the duplicates in the column INCIDENT_NUMBER.\nSet INCIDENT_NUMBER to be the index to uniquely identify offenses.\nFill the missing values on WEAPON_TYPE to be NO WEAPON. Fill all other missing values by 0.\nChange 1 in WEAPON_TYPE to be UNKNOWN.\nReassigned the columns to their respective types, e.g. numbers are numeric types and characters are strings.\nParse the INCIDENT_DATE to find out the year, month, day, hour and min and create columns accordingly. Note that AM/PM is taken into consideration when computating hours.\nCreate a column CRIME_TYPE based on the following rules:\n\nIf the OFFENSE_CODE contains 23, the crime is Non-Violent.\nIf the OFFENSE_DESCRIPTION contains THEFT, the crime is Non-Violent.\nAll other crimes are Violent Crime.\n\nCreate a column RISK_TYPE based on the following rules:\n\nIf the crime is Non-Violent and NO WEAPON, it is Low Risk.\nAll other crimes are High Risk.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Little Rock Crime Dataset</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Little Rock Crime Dataset</span>"
     ]
   },
   {
     "objectID": "contents/mnist.html",
     "href": "contents/mnist.html",
-    "title": "9  MNIST dataset",
+    "title": "10  MNIST dataset",
     "section": "",
-    "text": "9.1 Huggingface Hub\nThe dataset and description can be found from the Hugging Face hub. You may use the following code to load the dataset. The installation guide of the datasets library can be found in its homepage.",
+    "text": "10.1 Huggingface Hub\nThis is a famous dataset for handwritten digits recognition. More info can be found from its website. There are several versions of the dataset (that almost all machine learning libraries have it in their datasets). Here I provide the version from Huggingface Hub. The tensorflow version is outdated but kept here for reference.\nThe dataset and description can be found from the Hugging Face hub. You may use the following code to load the dataset. The installation guide of the datasets library can be found in its homepage.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>`MNIST` dataset</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>`MNIST` dataset</span>"
     ]
   },
   {
     "objectID": "contents/mnist.html#huggingface-hub",
     "href": "contents/mnist.html#huggingface-hub",
-    "title": "9  MNIST dataset",
+    "title": "10  MNIST dataset",
     "section": "",
-    "text": "9.1.1 Dataset mode\nWe may also load it directly in dataset mode.\n\nfrom datasets import load_dataset\n\nmnist_train = load_dataset(\"ylecun/mnist\", split='train')\nmnist_test = load_dataset(\"ylecun/mnist\", split='test')\n\nmnist_train\n\nDataset({\n    features: ['image', 'label'],\n    num_rows: 60000\n})\n\n\n\nmnist_test\n\nDataset({\n    features: ['image', 'label'],\n    num_rows: 10000\n})\n\n\nThe data point can be accessed by\n\nmnist_train[0]['image']\n\n\n\n\n\n\n\n\n\nmnist_train[0]['label']\n\n5\n\n\n\nmnist_train['image'][:3]\n\n[&lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;,\n &lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;,\n &lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;]\n\n\n\nmnist_train['label'][:3]\n\n[5, 0, 4]\n\n\nNote that you may either slice the dataset, or slice its field (e.g. image or label).\nSince we would like to work with matrices instead of the “image” object, we could use map to transform them.\n\nimport numpy as np\n\ndef pil_to_array(data):\n    data['image'] = np.array(data['image']).reshape(1, -1)\n    return data\n\nmnist_train_processed = mnist_train.map(pil_to_array)\nmnist_test_processed = mnist_test.map(pil_to_array)\n\nX_train = np.array(mnist_train_processed['image'])\ny_train = np.array(mnist_train_processed['label']).reshape(-1)\nX_test = np.array(mnist_test_processed['image'])\ny_test = np.array(mnist_test_processed['label']).reshape(-1)\n\n\n\n9.1.2 Streaming mode\n\nmnist_train_streaming = load_dataset(\"ylecun/mnist\", split='train', streaming=True)\nmnist_test_streaming = load_dataset(\"ylecun/mnist\", split='test', streaming=True)\n\nThe loaded datasets contains images. We may directly visualize it. Note that we load the dataset in streaming mode, so it is a generator and will give images one by one.\n\nnextdata = next(iter(mnist_train))\npic = nextdata['image']\nlabel = nextdata['label']\npic\n\n\n\n\n\n\n\n\n\nlabel\n\n5\n\n\nIf we first get the dataset mode, it could be transformed into the streaming mode.\n\nmnist_train = load_dataset(\"ylecun/mnist\", split='train')\niter_train = mnist_train.to_iterable_dataset()\n\nnextdata = next(iter(iter_train))\npic = nextdata['image']\npic\n\n\n\n\n\n\n\n\nWe could also apply the transformations to the streaming data.\n\nimport numpy as np\n\ndef pil_to_array(data):\n    data['image'] = np.array(data['image']).reshape(1, -1)\n    return data\n    \nmnist_train = load_dataset(\"ylecun/mnist\", split='train')\nmnist_test = load_dataset(\"ylecun/mnist\", split='test')\niter_train = mnist_train.to_iterable_dataset().map(pil_to_array)\niter_test = mnist_test.to_iterable_dataset().map(pil_to_array)",
+    "text": "10.1.1 Dataset mode\nWe may also load it directly in dataset mode.\n\nfrom datasets import load_dataset\n\nmnist_train = load_dataset(\"ylecun/mnist\", split='train')\nmnist_test = load_dataset(\"ylecun/mnist\", split='test')\n\nmnist_train\n\nDataset({\n    features: ['image', 'label'],\n    num_rows: 60000\n})\n\n\n\nmnist_test\n\nDataset({\n    features: ['image', 'label'],\n    num_rows: 10000\n})\n\n\nThe data point can be accessed by\n\nmnist_train[0]['image']\n\n\n\n\n\n\n\n\n\nmnist_train[0]['label']\n\n5\n\n\n\nmnist_train['image'][:3]\n\n[&lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;,\n &lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;,\n &lt;PIL.PngImagePlugin.PngImageFile image mode=L size=28x28&gt;]\n\n\n\nmnist_train['label'][:3]\n\n[5, 0, 4]\n\n\nNote that you may either slice the dataset, or slice its field (e.g. image or label).\nSince we would like to work with matrices instead of the “image” object, we could use map to transform them.\n\nimport numpy as np\n\ndef pil_to_array(data):\n    data['image'] = np.array(data['image']).reshape(1, -1)\n    return data\n\nmnist_train_processed = mnist_train.map(pil_to_array)\nmnist_test_processed = mnist_test.map(pil_to_array)\n\nX_train = np.array(mnist_train_processed['image'])\ny_train = np.array(mnist_train_processed['label']).reshape(-1)\nX_test = np.array(mnist_test_processed['image'])\ny_test = np.array(mnist_test_processed['label']).reshape(-1)\n\n\n\n10.1.2 Streaming mode\n\nmnist_train_streaming = load_dataset(\"ylecun/mnist\", split='train', streaming=True)\nmnist_test_streaming = load_dataset(\"ylecun/mnist\", split='test', streaming=True)\n\nThe loaded datasets contains images. We may directly visualize it. Note that we load the dataset in streaming mode, so it is a generator and will give images one by one.\n\nnextdata = next(iter(mnist_train))\npic = nextdata['image']\nlabel = nextdata['label']\npic\n\n\n\n\n\n\n\n\n\nlabel\n\n5\n\n\nIf we first get the dataset mode, it could be transformed into the streaming mode.\n\nmnist_train = load_dataset(\"ylecun/mnist\", split='train')\niter_train = mnist_train.to_iterable_dataset()\n\nnextdata = next(iter(iter_train))\npic = nextdata['image']\npic\n\n\n\n\n\n\n\n\nWe could also apply the transformations to the streaming data.\n\nimport numpy as np\n\ndef pil_to_array(data):\n    data['image'] = np.array(data['image']).reshape(1, -1)\n    return data\n    \nmnist_train = load_dataset(\"ylecun/mnist\", split='train')\nmnist_test = load_dataset(\"ylecun/mnist\", split='test')\niter_train = mnist_train.to_iterable_dataset().map(pil_to_array)\niter_test = mnist_test.to_iterable_dataset().map(pil_to_array)",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>`MNIST` dataset</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>`MNIST` dataset</span>"
     ]
   },
   {
     "objectID": "contents/mnist.html#tensorflow-version-possibly-outdated",
     "href": "contents/mnist.html#tensorflow-version-possibly-outdated",
-    "title": "9  MNIST dataset",
-    "section": "9.2 tensorflow version (possibly outdated)",
-    "text": "9.2 tensorflow version (possibly outdated)\ntensorflow/keras provides the data with the original split. This version is not recommended since keras changed a lot during recent updates so if you use newer version the following code might not work. In addition it takes a long time to install tensorflow library.\n\nimport tensorflow.keras as keras\n(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()",
+    "title": "10  MNIST dataset",
+    "section": "10.2 tensorflow version (possibly outdated)",
+    "text": "10.2 tensorflow version (possibly outdated)\ntensorflow/keras provides the data with the original split. This version is not recommended since keras changed a lot during recent updates so if you use newer version the following code might not work. In addition it takes a long time to install tensorflow library.\n\nimport tensorflow.keras as keras\n(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>`MNIST` dataset</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>`MNIST` dataset</span>"
     ]
   },
   {
     "objectID": "contents/plants_survival.html",
     "href": "contents/plants_survival.html",
-    "title": "10  Plant survival data with salt and microbe treatments",
+    "title": "11  Plant survival data with salt and microbe treatments",
     "section": "",
     "text": "This dataset is supported by DART SEED grant. It is provided by Dr. Suresh Subedi from ATU. The dataset is about the outcomes of certain treatments applied to plants. We would like to predict whether the plants survive based on the status of the plants and the treatments. The datafile can be downloaded from here.\nWe could use the following code to read the data.\n\nimport pandas as pd\n\ndf = pd.read_excel('assests/datasets/plants.xlsx', engine='openpyxl', sheet_name='data')\n\nThere are a few missing values. The missing values in Outcome_after 12 months are all dead. These are not recorded as dead because the cause of the death is more complicated and needs to be studied separatedly. In our case we could simply fill it with dead.\nThere are two more missing values in Stem diameter. For simplicity we drop them directly.\n\ndf['Outcome_after 12 months'].fillna('dead', inplace=True)\ndf = df.dropna()\n\nThen we would like to transform the data. Here are the rules.\n\nEndophyte: I+-&gt;1, I--&gt;-1\nTreatment: Salt-&gt;1, Fresh-&gt;0\nTree_Replicate: T1-&gt;1, T2-&gt;2, T3-&gt;3\nOutcome_after 12 months: survived-&gt;1, dead-&gt;0\n\nColumn SN will be dropped.\nFinally we put these together to get the features X and the label y.\n\ndf['Endophyte '] = df['Endophyte '].map({'I+': 1, 'I-': -1})\ndf['Treatment'] = df['Treatment'].map({'Fresh': 0, 'Salt': 1})\ndf['Tree_Replicate'] = df['Tree_Replicate'].str[1].astype(int)\ndf['Outcome_after 12 months'] = df['Outcome_after 12 months'].map({'survived': 1, 'dead': 0})\n\nX = df.iloc[:, 1: -1].to_numpy()\ny = df['Outcome_after 12 months'].to_numpy()",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Plant survival data with salt and microbe treatments</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Plant survival data with salt and microbe treatments</span>"
     ]
   },
   {
     "objectID": "contents/QSR.html",
     "href": "contents/QSR.html",
-    "title": "11  QSR",
+    "title": "12  QSR",
     "section": "",
     "text": "Here is the dataset QSR.",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>QSR</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>QSR</span>"
     ]
   },
   {
     "objectID": "contents/random.html",
     "href": "contents/random.html",
-    "title": "12  Randomly generated datasets",
+    "title": "13  Randomly generated datasets",
     "section": "",
-    "text": "12.1 make_moon dataset\nThis is used to generate two interleaving half circles.\nfrom sklearn.datasets import make_moons\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_moons(n_samples=10000, noise=0.4, random_state=42)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "text": "13.1 make_moon dataset\nThis is used to generate two interleaving half circles.\nfrom sklearn.datasets import make_moons\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_moons(n_samples=10000, noise=0.4, random_state=42)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Randomly generated datasets</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Randomly generated datasets</span>"
     ]
   },
   {
     "objectID": "contents/random.html#make_gaussian_quantiles-dataset",
     "href": "contents/random.html#make_gaussian_quantiles-dataset",
-    "title": "12  Randomly generated datasets",
-    "section": "12.2 make_gaussian_quantiles dataset",
-    "text": "12.2 make_gaussian_quantiles dataset\nThis is a generated isotropic Gaussian and label samples by quantile.\nThe following code are from this page. It is used to generate a relative complex dataset by combining two datesets together.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\nimport numpy as np\n\nX1, y1 = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                                 n_classes=2, random_state=1)\nX2, y2 = make_gaussian_quantiles(mean=(3, 3), cov=1.5, n_samples=300,\n                                 n_features=2, n_classes=2, random_state=1)\nX = np.concatenate((X1, X2))\ny = np.concatenate((y1, -y2 + 1))\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n\nIt can also be used to generate multiclass dataset.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                               n_classes=4, random_state=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "title": "13  Randomly generated datasets",
+    "section": "13.2 make_gaussian_quantiles dataset",
+    "text": "13.2 make_gaussian_quantiles dataset\nThis is a generated isotropic Gaussian and label samples by quantile.\nThe following code are from this page. It is used to generate a relative complex dataset by combining two datesets together.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\nimport numpy as np\n\nX1, y1 = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                                 n_classes=2, random_state=1)\nX2, y2 = make_gaussian_quantiles(mean=(3, 3), cov=1.5, n_samples=300,\n                                 n_features=2, n_classes=2, random_state=1)\nX = np.concatenate((X1, X2))\ny = np.concatenate((y1, -y2 + 1))\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)\n\nIt can also be used to generate multiclass dataset.\n\nfrom sklearn.datasets import make_gaussian_quantiles\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_gaussian_quantiles(cov=2.0, n_samples=200, n_features=2,\n                               n_classes=4, random_state=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Randomly generated datasets</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Randomly generated datasets</span>"
     ]
   },
   {
     "objectID": "contents/random.html#make_classification",
     "href": "contents/random.html#make_classification",
-    "title": "12  Randomly generated datasets",
-    "section": "12.3 make_classification",
-    "text": "12.3 make_classification\nThis will create a multiclass dataset. Without shuffling, X horizontally stacks features in the following order: the primary n_informative features, followed by n_redundant linear combinations of the informative features, followed by n_repeated duplicates, drawn randomly with replacement from the informative and redundant features.\nFor more details please see the official document.\n\nfrom sklearn.datasets import make_classification\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_classification(n_samples=1000, n_features=10, n_informative=2, n_redundant=2, n_repeated=2, n_classes=3, n_clusters_per_class=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
+    "title": "13  Randomly generated datasets",
+    "section": "13.3 make_classification",
+    "text": "13.3 make_classification\nThis will create a multiclass dataset. Without shuffling, X horizontally stacks features in the following order: the primary n_informative features, followed by n_redundant linear combinations of the informative features, followed by n_repeated duplicates, drawn randomly with replacement from the informative and redundant features.\nFor more details please see the official document.\n\nfrom sklearn.datasets import make_classification\nfrom sklearn.model_selection import train_test_split\n\nX, y = make_classification(n_samples=1000, n_features=10, n_informative=2, n_redundant=2, n_repeated=2, n_classes=3, n_clusters_per_class=1)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Randomly generated datasets</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Randomly generated datasets</span>"
     ]
   },
   {
     "objectID": "contents/titanic.html",
     "href": "contents/titanic.html",
-    "title": "13  titanic dataset",
+    "title": "14  titanic dataset",
     "section": "",
     "text": "This is the famuous Kaggle101 dataset. The original data can be download from the Kaggle page. You may also download the training set and the test data by click the link.\n\nimport pandas as pd\ndftrain = pd.read_csv('train.csv')\ndftest = pd.read_csv('test.csv')\n\nThe original is a little bit messy with missing values and mix of numeric data and string data. The above code reads the data into a DataFrame. The following code does some basic of preprocess. This part should be modified if you want to improve the performance of your model.\n\nOnly select columns: Pclass, Sex, Age, SibSp, Parch, Fare. That is to say, Name, Cabin and Embarked are dropped.\nFill the missing values in column Age and Fare by 0.\nReplace the column Sex by the following map: {'male': 0, 'female': 1}.\n\n\nimport pandas as pd\nimport numpy as np\n\ndef getnp(df):\n    df['mapSex'] = df['Sex'].map(lambda x: {'male': 0, 'female': 1}[x])\n    dfx = df[['Pclass', 'mapSex', 'Age', 'SibSp', 'Parch', 'Fare']].copy()\n    dfx['Fare'].fillna(0, inplace=True)\n    dfx['Age'].fillna(0, inplace=True)\n    if 'Survived' in df.columns:\n        y = df['Survived'].to_numpy()\n    else:\n        y = None\n    X = dfx.to_numpy()\n    return (X, y)\n\nX_train, y_train = getnp(dftrain)\nX_test, _ = getnp(dftest)\n\nFor the purpose of submitting to Kaggle, after getting y_pred, we could use the following file to prepare for the submission file.\n\ndef getdf(df, y):\n    df['Survived'] = y\n    return df[['PassengerId', 'Survived']]\n\ngetdf(dftest, y_pred).to_csv('result.csv')",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>`titanic` dataset</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>`titanic` dataset</span>"
     ]
   }
 ]
