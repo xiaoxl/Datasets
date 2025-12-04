@@ -1,0 +1,181 @@
+# Adult income dataset
+This dataset is from [UCI machine learning repository](https://archive.ics.uci.edu/dataset/2/adult). The dataset is about the annual income of an individual and the purpose of the project is to predict whether the annual income exceeds $50K/year or not. 
+
+## Reading data
+- There are two dataset files. `adult.data` is the training dataset and `adult.test` is the test dataset.
+- Both files don't have header lines. So we need to manually specify column names. 
+- The first line of `adult.test` should be skipped since it is irrelevent to our dataset.
+- In this dataset missing values are marked as ` ?`. We would like to remove all missing values.
+
+
+```{python}
+import pandas as pd
+
+train_df = pd.read_csv("assests/datasets/adult/adult.data", na_values=" ?", header=None).dropna()
+test_df = pd.read_csv("assests/datasets/adult/adult.test", na_values=" ?", skiprows=[0], header=None).dropna()
+
+colnames = [
+    "age",
+    "workclass",
+    "fnlwgt",
+    "education",
+    "education-num",
+    "marital-status",
+    "occupation",
+    "relationship",
+    "race",
+    "sex",
+    "capital-gain",
+    "capital-loss",
+    "hours-per-week",
+    "native-country",
+    "income",
+]
+
+train_df.columns = colnames
+test_df.columns = colnames
+```
+
+## Preprocessing
+There are 15 columns. The last column is `income` which has two string values `' >50K'` and `' <=50K'`. The rest variables are descibed below.
+
+- `age`: continuous
+- `workclass`: 8 categories
+- `fnlwgt`: continuous
+- `education`: 16 categories
+- `education-num`: continuous
+- `marital-status`: 7 categories
+- `occupation`: 14 categories
+- `relationship`: 6 categories
+- `race`: 5 categories
+- `sex`: 2 categories
+- `capital-gain`: continuous
+- `capital-loss`: continuous
+- `hours-per-week`: continuous
+- `native-country`: 41 categories
+
+So for features we need to normalize numerical columns and apply one-hot encoding for categorical columns. For labels, we need to convert `' >50K'` and `' <=50K'` into `1` and `0`.
+
+### Split the label column
+
+
+```{python}
+X_train = train_df.drop("income", axis=1)
+y_train = (train_df["income"] == " >50K").astype(int)
+X_test = test_df.drop("income", axis=1) 
+y_test = (test_df["income"] == " >50K").astype(int)
+```
+
+
+
+### Normalize
+```{python}
+from sklearn.preprocessing import MinMaxScaler
+
+numeric_features = [
+    "age",
+    "fnlwgt",
+    "education-num",
+    "capital-gain",
+    "capital-loss",
+    "hours-per-week",
+]
+mm = MinMaxScaler()
+
+numeric_X_train = mm.fit_transform(X_train[numeric_features])
+numeric_X_test = mm.transform(X_test[numeric_features])
+```
+
+### One-hot encoding
+
+```{python}
+from sklearn.preprocessing import OneHotEncoder
+
+categorical_features = [
+    "workclass",
+    "education",
+    "marital-status",
+    "occupation",
+    "relationship",
+    "race",
+    "sex",
+    "native-country",
+]
+ohe = OneHotEncoder(handle_unknown="ignore")
+
+categorical_X_train = ohe.fit_transform(X_train[categorical_features])
+categorical_X_test = ohe.transform(X_test[categorical_features])
+```
+
+The onehot decoding of the categorical columns is relative large, and is therefore stored as a sparse matrix (which is an object different from numpy array). So we need to convert it back to numpy array.
+
+```{python}
+import numpy as np
+
+categorical_X_train = categorical_X_train.toarray()
+categorical_X_test = categorical_X_test.toarray()
+```
+
+
+### Concatenate
+```{python}
+X_train_norm = np.concatenate([numeric_X_train, categorical_X_train], axis=1)
+X_test_norm = np.concatenate([numeric_X_test, categorical_X_test], axis=1)
+```
+
+### Composer
+
+The best pratice for the above operations is to write a composer.
+
+
+```{python}
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+
+preprocess = ColumnTransformer(
+    transformers=[
+        ("num", StandardScaler(), numeric_features),
+        ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
+    ]
+)
+
+X_train_norm = preprocess.fit_transform(X_train)
+X_test_norm = preprocess.transform(X_test)
+```
+
+The results here are also sparse matrix. So we need to convert it back to dense array.
+
+
+```{python}
+X_train_norm = X_train_norm.toarray()
+X_test_norm = X_test_norm.toarray()
+```
+
+
+
+
+## `Dataset` class
+
+We build a `Dataset` class in order to use it for a nerual network.
+
+
+```{python}
+import torch
+from torch.utils.data import Dataset
+
+class AdultDataset(Dataset):
+    def __init__(self, X, y):
+        self.X = torch.tensor(X, dtype=torch.float32)
+        self.y = torch.tensor(y, dtype=torch.long).reshape(-1, 1)
+
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
+
+
+train_ds = AdultDataset(X_train_norm, y_train)
+test_ds = AdultDataset(X_test_norm, y_test)
+```

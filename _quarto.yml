@@ -7,7 +7,7 @@ number-sections: true
 toc-depth: 3
 number-depth: 4
 bibliography: book.bib
-csl: C:/Users/Xinli/Documents/ims.csl
+csl: ims.csl
 
 crossref:
   labels: arabic        # (default is arabic)
@@ -16,7 +16,7 @@ crossref:
 execute: 
   freeze: auto
 
-jupyter: ds25
+jupyter: core
 
 format:
   html:
@@ -33,6 +33,7 @@ book:
   date: last-modified
   chapters: 
     - index.qmd    
+    - contents/adult.qmd
     - contents/breast_cancer.qmd
     - contents/datingtestset.qmd
     - contents/ds4psy.qmd
