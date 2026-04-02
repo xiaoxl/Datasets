@@ -1,0 +1,41 @@
+## Real Estate Valuation
+
+Webpage: <https://archive.ics.uci.edu/dataset/477/real+estate+valuation+data+set>
+
+```{r}
+real_estate <- fetch_ucirepo(id = 477)
+real_estate_data <- real_estate$data$original
+
+dim(real_estate_data)
+head(real_estate_data)
+```
+
+- **Number of features:** 6
+- **Number of targets:** 1
+- **Number of observations:** 414
+- **Response variable:** `Y house price of unit area`
+- **Topic:** housing valuation in New Taipei City
+- **Parsing / encoding:** convert `X1 transaction date` from its decimal-year format into a more interpretable time representation if needed
+
+<!-- ## UJIIndoorLoc
+
+Webpage: <https://archive.ics.uci.edu/dataset/310/ujiindoorloc>
+
+```{r}
+#| eval: false
+ujiindoorloc <- fetch_ucirepo(id = 310)
+ujiindoorloc_data <- ujiindoorloc$data$original
+
+dim(ujiindoorloc_data)
+head(ujiindoorloc_data)
+```
+
+- **Number of features:** not clearly specified on the UCI page
+- **Number of targets:** 4 position-related outputs are described on the UCI page
+- **Number of observations:** 21,048 total, from 19,937 training rows and 1,111 validation rows
+- **Response variable:** for regression, the clearest targets are `Longitude` and `Latitude`
+- **Topic:** indoor localization from WiFi fingerprints
+- **Missing-data handling:** none indicated on the UCI page, but the value `100` should be treated as a special code for undetected WAPs rather than as an ordinary numeric signal
+- **Parsing / encoding:** parse the UNIX `Timestamp` if time effects matter and decide how to treat categorical fields such as `BuildingID`, `SpaceID`, `UserID`, and `PhoneID`
+- **Merging / reshaping:** combine `trainingData.csv` and `validationData.csv` if you want one unified analysis table -->
+

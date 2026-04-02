@@ -1,0 +1,17 @@
+## Gas Turbine CO and NOx Emission Data Set
+
+Webpage: <https://archive.ics.uci.edu/dataset/551/gas+turbine+co+and+nox+emission+data+set>
+
+```{r}
+gas_turbine <- fetch_ucirepo(id = 551)
+gas_turbine_data <- gas_turbine$data$original
+
+dim(gas_turbine_data)
+head(gas_turbine_data)
+```
+
+- **Number of variables:** 10
+- **Number of observations:** 36,733
+- **Response variable:** official targets are `CO` and `NOX`
+- **Topic:** gas turbine emissions and sensor measurements
+

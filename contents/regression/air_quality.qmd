@@ -1,0 +1,26 @@
+## Air Quality
+
+Webpage: <https://archive.ics.uci.edu/dataset/360/air+quality>
+
+```{r}
+air_quality <- fetch_ucirepo(id = 360)
+air_quality_data <- air_quality$data$original
+
+dim(air_quality_data)
+head(air_quality_data)
+```
+
+- **Number of features:** 14
+- **Number of targets:** 1
+- **Number of observations:** 9,357
+- **Response variable:** a reasonable regression target is one ground-truth pollutant measurement, such as `CO(GT)`
+- **Topic:** air pollution measurements from gas sensors
+- **Missing-data handling:** convert the original missing-value code, commonly `-200`, to `NA`
+- **Parsing / encoding:** parse and combine the date and time fields into a usable timestamp
+- **Other preparation:** after choosing one `(GT)` pollutant as the target, drop the other `(GT)` pollutant columns and keep the sensor, weather, and time-based variables as predictors
+
+
+
+
+<!--
+

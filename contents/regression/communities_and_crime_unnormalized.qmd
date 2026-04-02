@@ -1,0 +1,43 @@
+## Communities and Crime Unnormalized
+
+Webpage: <https://archive.ics.uci.edu/dataset/211/communities+and+crime+unnormalized>
+
+```{r}
+communities_crime <- fetch_ucirepo(id = 211)
+communities_crime_data <- communities_crime$data$original
+
+dim(communities_crime_data)
+head(communities_crime_data)
+```
+
+- **Number of features:** 125
+- **Number of targets:** 18 possible crime outcomes are described on the UCI page
+- **Number of observations:** 2,215
+- **Response variable:** a clear regression target is `ViolentCrimesPerPop`
+- **Topic:** socio-economic, law-enforcement, and crime measurements for U.S. communities
+- **Missing-data handling:** inspect and handle the many missing values, especially in the law-enforcement variables
+- **Parsing / encoding:** encode categorical identifiers such as `State` if they are retained
+- **Other preparation:** choose one crime variable as the target and remove overlapping crime subtotal variables that would leak information into that target
+
+<!-- ## KDD Cup 1998
+
+Webpage: <https://archive.ics.uci.edu/dataset/129/kdd+cup+1998>
+
+```{r}
+#| eval: false
+kdd_cup_1998 <- fetch_ucirepo(id = 129)
+kdd_cup_1998_data <- kdd_cup_1998$data$original
+
+dim(kdd_cup_1998_data)
+head(kdd_cup_1998_data)
+```
+
+- **Number of features:** not clearly specified on the UCI page
+- **Number of targets:** not clearly specified on the UCI page
+- **Number of observations:** 191,779
+- **Response variable:** a clear regression target is `TARGET_D`, the donation amount in the original KDD target files
+- **Topic:** direct-marketing donation modeling
+- **Missing-data handling:** inspect and handle the missing values noted on the UCI page
+- **Parsing / encoding:** encode the large number of categorical marketing and demographic variables
+- **Merging / reshaping:** join the learning file with the provided target file information when reconstructing a modeling table -->
+

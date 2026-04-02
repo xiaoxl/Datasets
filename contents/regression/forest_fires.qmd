@@ -1,0 +1,18 @@
+## Forest Fires
+
+Webpage: <https://archive.ics.uci.edu/dataset/162/forest+fires>
+
+```{r}
+forest_fires <- fetch_ucirepo(id = 162)
+forest_fires_data <- forest_fires$data$original
+
+dim(forest_fires_data)
+head(forest_fires_data)
+```
+
+- **Number of features:** 12
+- **Number of targets:** 1
+- **Number of observations:** 517
+- **Response variable:** `area`
+- **Topic:** predicting burned area of forest fires using weather and fire indices
+

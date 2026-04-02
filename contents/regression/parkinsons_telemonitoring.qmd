@@ -1,0 +1,18 @@
+## Parkinsons Telemonitoring
+
+Webpage: <https://archive.ics.uci.edu/dataset/189/parkinsons+telemonitoring>
+
+```{r}
+parkinsons_telemonitoring <- fetch_ucirepo(id = 189)
+parkinsons_telemonitoring_data <- parkinsons_telemonitoring$data$original
+
+dim(parkinsons_telemonitoring_data)
+head(parkinsons_telemonitoring_data)
+```
+
+- **Number of features:** 19
+- **Number of targets:** 2
+- **Number of observations:** 5,875
+- **Response variable:** official targets are `motor_UPDRS` and `total_UPDRS`
+- **Topic:** remote monitoring of Parkinson's disease symptoms from voice measures
+

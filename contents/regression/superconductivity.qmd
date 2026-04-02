@@ -1,0 +1,18 @@
+## Superconductivity
+
+Webpage: <https://archive.ics.uci.edu/dataset/464/superconductivty+data>
+
+```{r}
+superconductivity <- fetch_ucirepo(id = 464)
+superconductivity_data <- superconductivity$data$original
+
+dim(superconductivity_data)
+head(superconductivity_data)
+```
+
+- **Number of features:** 81
+- **Number of targets:** 1
+- **Number of observations:** 21,263
+- **Response variable:** `critical_temp`
+- **Topic:** materials science and superconductivity
+

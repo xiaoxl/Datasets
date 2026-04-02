@@ -1,0 +1,18 @@
+## Auto MPG
+
+Webpage: <https://archive.ics.uci.edu/ml/datasets/auto+mpg>
+
+```{r}
+auto_mpg <- fetch_ucirepo(id = 9)
+auto_mpg_data <- auto_mpg$data$original
+
+dim(auto_mpg_data)
+head(auto_mpg_data)
+```
+
+- **Number of features:** 7
+- **Number of targets:** 1
+- **Number of observations:** 398
+- **Response variable:** `mpg`
+- **Topic:** fuel economy of automobiles
+

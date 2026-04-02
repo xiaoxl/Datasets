@@ -4,25 +4,27 @@
 ## `csv` files
 The four tibbles can be downloaded directly from here, as `csv` files.
 
-[`t_1.csv`](assests/datasets/ds4psy/t_1.csv)
+[`t_1.csv`](../assests/datasets/ds4psy/t_1.csv)
 
-[`t_2.csv`](assests/datasets/ds4psy/t_2.csv)
+[`t_2.csv`](../assests/datasets/ds4psy/t_2.csv)
 
-[`t_3.csv`](assests/datasets/ds4psy/t_3.csv)
+[`t_3.csv`](../assests/datasets/ds4psy/t_3.csv)
 
-[`t_4.csv`](assests/datasets/ds4psy/t_4.csv)
+[`t_4.csv`](../assests/datasets/ds4psy/t_4.csv)
 
 
 ## `R` codes
 `ds4psy` is a R package. There are several dataset in the package. The R package can be installed directly.
 
-```r
+```{r}
+#| eval: false
 install.packages("ds4psy")
 ```
 After load the package, the four tibbles will be directly loaded.
 
 
-```r
+```{r}
+#| eval: false
 library(ds4psy)
 t_1
 t_2
@@ -45,3 +47,7 @@ t2 = pd.read_csv('t_2.csv')
 t3 = pd.read_csv('t_3.csv')
 t4 = pd.read_csv('t_4.csv')
 ```
+
+
+
+

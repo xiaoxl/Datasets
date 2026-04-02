@@ -1,0 +1,18 @@
+## Heart Disease
+
+Webpage: <https://archive.ics.uci.edu/dataset/45/heart+disease>
+
+```{r}
+heart_disease <- fetch_ucirepo(id = 45)
+heart_disease_data <- heart_disease$data$original
+
+dim(heart_disease_data)
+head(heart_disease_data)
+```
+
+- **Number of features:** 13
+- **Number of targets:** 1
+- **Number of observations:** 303 for the Cleveland subset typically used in teaching
+- **Response variable:** official target is `num`, and treat it as a severity score (while the orginal num is only integer).
+- **Topic:** clinical measurements related to heart disease
+

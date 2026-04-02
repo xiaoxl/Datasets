@@ -1,0 +1,20 @@
+## Airfoil Self-Noise
+
+Webpage: <https://archive.ics.uci.edu/dataset/291/airfoil+self+noise>
+
+```{r}
+airfoil_self_noise <- fetch_ucirepo(id = 291)
+airfoil_self_noise_data <- airfoil_self_noise$data$original
+
+dim(airfoil_self_noise_data)
+head(airfoil_self_noise_data)
+```
+
+- **Number of features:** 5
+- **Number of targets:** 1
+- **Number of observations:** 1,503
+- **Response variable:** `scaled-sound-pressure`
+- **Topic:** aerodynamic and acoustic properties of airfoils
+
+<!--
+

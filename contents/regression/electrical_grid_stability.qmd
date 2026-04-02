@@ -1,0 +1,18 @@
+## Electrical Grid Stability Simulated Data
+
+Webpage: <https://archive.ics.uci.edu/dataset/471/electrical+grid+stability+simulated+data>
+
+```{r}
+electrical_grid_stability <- fetch_ucirepo(id = 471)
+electrical_grid_stability_data <- electrical_grid_stability$data$original
+
+dim(electrical_grid_stability_data)
+head(electrical_grid_stability_data)
+```
+
+- **Number of features:** 12
+- **Number of targets:** 2
+- **Number of observations:** 10,000
+- **Response variable:** official targets are `stab` and `stabf`; for regression, use `stab`
+- **Topic:** simulated electrical grid stability
+

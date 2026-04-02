@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 toc: true
-number-sections: true
+number-sections: false
 toc-depth: 3
 number-depth: 4
 bibliography: book.bib
@@ -15,51 +15,76 @@ crossref:
 
 execute: 
   freeze: auto
+  eval: false
+
+
+metadata-files:
+  - _variables.yml
 
 jupyter: core
 
 format:
-  html:
-    theme: 
-      - cosmo
-    code-block-bg: true
-    code-block-border-left: true 
-    code-line-numbers: true
-    highlight-style: atom-one
+  bookup-html:
+        toc: true
+        toc-depth: 3
+        css: blocks.css
 
 book:
   title: "Datasets Collection"
   author: "Xinli Xiao"
   date: last-modified
   chapters: 
-    - index.qmd    
-    - contents/adult.qmd
-    - contents/breast_cancer.qmd
-    - contents/datingtestset.qmd
-    - contents/ds4psy.qmd
-    - contents/faker.qmd
-    - contents/horse_colic.qmd
-    - contents/iris.qmd
-    - contents/kagglediabetes.qmd
-    - contents/littlerockcrime.qmd
-    - contents/mnist.qmd
-    - contents/plants_survival.qmd
-    - contents/QSR.qmd
-    - contents/random.qmd
-    - contents/titanic.qmd    
+    - index.qmd
+    - part: Regression
+      chapters:
+        - contents/regression/QSR.qmd
+        - contents/regression/student_performance.qmd
+        - contents/regression/bike_sharing.qmd
+        - contents/regression/auto_mpg.qmd
+        - contents/regression/wine_quality.qmd
+        - contents/regression/heart_disease.qmd
+        - contents/regression/forest_fires.qmd
+        - contents/regression/energy_efficiency.qmd
+        - contents/regression/airfoil_self_noise.qmd
+        - contents/regression/parkinsons_telemonitoring.qmd
+        - contents/regression/abalone.qmd
+        - contents/regression/concrete_compressive_strength.qmd
+        - contents/regression/electrical_grid_stability.qmd
+        - contents/regression/seoul_bike_sharing.qmd
+        - contents/regression/gas_turbine_emissions.qmd
+        - contents/regression/superconductivity.qmd
+        - contents/regression/appliances_energy_prediction.qmd
+        - contents/regression/air_quality.qmd
+        - contents/regression/communities_and_crime_unnormalized.qmd
+        - contents/regression/real_estate_valuation.qmd
+    - part: Classification
+      chapters:
+        - contents/classification/adult.qmd
+        - contents/classification/breast_cancer.qmd
+        - contents/classification/datingtestset.qmd
+        - contents/classification/horse_colic.qmd
+        - contents/classification/iris.qmd
+        - contents/classification/kagglediabetes.qmd
+        - contents/classification/littlerockcrime.qmd
+        - contents/classification/mnist.qmd
+        - contents/classification/plants_survival.qmd
+        - contents/classification/random.qmd
+        - contents/classification/titanic.qmd
+    - part: No Targets
+      chapters:
+        - contents/no_targets/ds4psy.qmd
+        - contents/no_targets/faker.qmd
   sidebar:
-    style: floating
-    pinned: true
+    style: "docked"
+    pinned: false
     align: center
     border: true
     search: true
     collapse-level: 1
-  navbar:
-    subtitle: "Fall 2024"
+    title: "Datasets Collection <br> {{< meta datetime.semester >}} {{< meta datetime.year >}}"
+  # navbar:
+  #   subtitle: "good"
   page-navigation: true
-
-
-    
-
-
-
+  bread-crumbs: false
+  search: true
+  reader-mode: true

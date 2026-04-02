@@ -1,6 +1,14 @@
 # Adult income dataset
 This dataset is from [UCI machine learning repository](https://archive.ics.uci.edu/dataset/2/adult). The dataset is about the annual income of an individual and the purpose of the project is to predict whether the annual income exceeds $50K/year or not. 
 
+## 
+
+
+
+
+
+
+
 ## Reading data
 - There are two dataset files. `adult.data` is the training dataset and `adult.test` is the test dataset.
 - Both files don't have header lines. So we need to manually specify column names. 
@@ -9,10 +17,11 @@ This dataset is from [UCI machine learning repository](https://archive.ics.uci.e
 
 
 ```{python}
+#| eval: false
 import pandas as pd
 
-train_df = pd.read_csv("assests/datasets/adult/adult.data", na_values=" ?", header=None).dropna()
-test_df = pd.read_csv("assests/datasets/adult/adult.test", na_values=" ?", skiprows=[0], header=None).dropna()
+train_df = pd.read_csv("../assests/datasets/adult/adult.data", na_values=" ?", header=None).dropna()
+test_df = pd.read_csv("../assests/datasets/adult/adult.test", na_values=" ?", skiprows=[0], header=None).dropna()
 
 colnames = [
     "age",
@@ -60,6 +69,7 @@ So for features we need to normalize numerical columns and apply one-hot encodin
 
 
 ```{python}
+#| eval: false
 X_train = train_df.drop("income", axis=1)
 y_train = (train_df["income"] == " >50K").astype(int)
 X_test = test_df.drop("income", axis=1) 
@@ -70,6 +80,7 @@ y_test = (test_df["income"] == " >50K").astype(int)
 
 ### Normalize
 ```{python}
+#| eval: false
 from sklearn.preprocessing import MinMaxScaler
 
 numeric_features = [
@@ -89,6 +100,7 @@ numeric_X_test = mm.transform(X_test[numeric_features])
 ### One-hot encoding
 
 ```{python}
+#| eval: false
 from sklearn.preprocessing import OneHotEncoder
 
 categorical_features = [
@@ -110,6 +122,7 @@ categorical_X_test = ohe.transform(X_test[categorical_features])
 The onehot decoding of the categorical columns is relative large, and is therefore stored as a sparse matrix (which is an object different from numpy array). So we need to convert it back to numpy array.
 
 ```{python}
+#| eval: false
 import numpy as np
 
 categorical_X_train = categorical_X_train.toarray()
@@ -119,6 +132,7 @@ categorical_X_test = categorical_X_test.toarray()
 
 ### Concatenate
 ```{python}
+#| eval: false
 X_train_norm = np.concatenate([numeric_X_train, categorical_X_train], axis=1)
 X_test_norm = np.concatenate([numeric_X_test, categorical_X_test], axis=1)
 ```
@@ -129,6 +143,7 @@ The best pratice for the above operations is to write a composer.
 
 
 ```{python}
+#| eval: false
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
@@ -147,6 +162,7 @@ The results here are also sparse matrix. So we need to convert it back to dense 
 
 
 ```{python}
+#| eval: false
 X_train_norm = X_train_norm.toarray()
 X_test_norm = X_test_norm.toarray()
 ```
@@ -160,6 +176,7 @@ We build a `Dataset` class in order to use it for a nerual network.
 
 
 ```{python}
+#| eval: false
 import torch
 from torch.utils.data import Dataset
 
@@ -179,3 +196,91 @@ class AdultDataset(Dataset):
 train_ds = AdultDataset(X_train_norm, y_train)
 test_ds = AdultDataset(X_test_norm, y_test)
 ```
+
+
+## Regression Variant
+
+Webpage: <https://archive.ics.uci.edu/dataset/2/adult>
+
+```{r}
+adult <- fetch_ucirepo(id = 2)
+adult_data <- adult$data$original
+
+dim(adult_data)
+head(adult_data)
+```
+
+- **Number of features:** 14
+- **Number of targets:** 1
+- **Number of observations:** 48,842
+- **Response variable:** if you want regression, a workable quantitative outcome is `hours-per-week`
+- **Topic:** census-style demographic and employment data
+- **Missing-data handling:** convert `?` placeholders to `NA`
+- **Parsing / encoding:** one-hot encode categorical predictors such as work class, education, marital status, occupation, relationship, race, sex, and native country
+- **Other preparation:** remove or redefine the original classification target if it is not part of the regression task
+
+<!-- ## Bank Marketing
+
+Webpage: <https://archive.ics.uci.edu/dataset/222/bank+marketing>
+
+```{r}
+#| eval: false
+bank_marketing <- fetch_ucirepo(id = 222)
+bank_marketing_data <- bank_marketing$data$original
+
+dim(bank_marketing_data)
+head(bank_marketing_data)
+```
+
+- **Number of features:** 16
+- **Number of targets:** 1
+- **Number of observations:** 45,211
+- **Response variable:** official target is `y`; for regression, users sometimes instead model a quantitative field such as `balance`
+- **Topic:** direct marketing campaigns by a Portuguese banking institution
+- **Preprocessing needed:** remove or carefully handle the campaign outcome variable `y` if it is not being modeled
+- **Preprocessing needed:** encode categorical fields such as job, marital status, education, contact type, month, and poutcome
+- **Preprocessing needed:** check for skewness in `balance`, `duration`, and campaign-count variables and transform if needed -->
+
+<!-- ## Online Retail
+
+Webpage: <https://archive.ics.uci.edu/dataset/352/online+retail>
+
+```{r}
+#| eval: false
+online_retail <- fetch_ucirepo(id = 352)
+online_retail_data <- online_retail$data$original
+
+dim(online_retail_data)
+head(online_retail_data)
+```
+
+- **Number of variables:** 8
+- **Number of observations:** 541,909
+- **Response variable:** a quantitative choice is `UnitPrice`
+- **Topic:** online retail transactions
+- **Preprocessing needed:** parse `InvoiceDate` as a date-time variable
+- **Preprocessing needed:** remove cancellations and returns, typically identified by invoice codes beginning with `C` or by negative quantities
+- **Preprocessing needed:** decide how to handle missing `CustomerID`
+- **Preprocessing needed:** encode `Country` and engineer transaction-level or customer-level features if modeling beyond raw line items -->
+
+<!-- ## Car Evaluation
+
+Webpage: <https://archive.ics.uci.edu/dataset/19/car+evaluation>
+
+```{r}
+#| eval: false
+car_evaluation <- fetch_ucirepo(id = 19)
+car_evaluation_data <- car_evaluation$data$original
+
+dim(car_evaluation_data)
+head(car_evaluation_data)
+```
+
+- **Number of features:** 6
+- **Number of targets:** 1
+- **Number of observations:** 1,728
+- **Response variable:** this is mainly a classification dataset; if you use it for regression, you would need to create an ordinal or numeric response yourself
+- **Topic:** car acceptability evaluation
+- **Preprocessing needed:** create a numeric or ordinal response from the categorical acceptability label
+- **Preprocessing needed:** encode all predictors, which are categorical and ordinal
+- **Preprocessing needed:** preserve ordinal structure for variables such as buying price, maintenance cost, safety, luggage boot size, and number of persons -->

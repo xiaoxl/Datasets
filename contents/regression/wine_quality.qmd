@@ -1,0 +1,18 @@
+## Wine Quality
+
+Webpage: <https://archive.ics.uci.edu/dataset/186/wine+quality>
+
+```{r}
+wine_quality <- fetch_ucirepo(id = 186)
+wine_quality_data <- wine_quality$data$original
+
+dim(wine_quality_data)
+head(wine_quality_data)
+```
+
+- **Number of features:** 12
+- **Number of targets:** 1
+- **Number of observations:** 6,497 combined across red and white wine data.
+- **Response variable:** `quality`
+- **Topic:** predicting wine quality from physicochemical measurements
+

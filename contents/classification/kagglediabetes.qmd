@@ -1,6 +1,6 @@
 ## Kaggle Diabetes
 
-This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective is to predict based on diagnostic measurements whether a patient has diabetes. The dataset is now transferred from Kaggle. The dataset file can be downloaded from [here](assests/datasets/diabetes.csv). After downloading it, you may put it in the working directory and use the following code to load it.
+This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective is to predict based on diagnostic measurements whether a patient has diabetes. The dataset is now transferred from Kaggle. The dataset file can be downloaded from [here](../assests/datasets/diabetes.csv). After downloading it, you may put it in the working directory and use the following code to load it.
 
 
 ```{python}

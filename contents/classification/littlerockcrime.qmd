@@ -1,6 +1,6 @@
 ## Little Rock Crime Dataset
 
-The dataset was collected from the Open Data source called little rock's data hub. This dataset is 13 MB with 80,926 rows/observation and 14 different columns. The principal motivation behind using this dataset is to create a precise model to anticipate crimes. It can be downloaded from [here](assests/datasets/lrpd.csv). 
+The dataset was collected from the Open Data source called little rock's data hub. This dataset is 13 MB with 80,926 rows/observation and 14 different columns. The principal motivation behind using this dataset is to create a precise model to anticipate crimes. It can be downloaded from [here](../assests/datasets/lrpd.csv). 
 
 The dataset could be cleaned as follows.
 
@@ -21,4 +21,5 @@ Data Cleaning and wraggling steps:
 
     - If the crime is `Non-Violent` and `NO WEAPON`, it is `Low Risk`.
     - All other crimes are `High Risk`.
+
 

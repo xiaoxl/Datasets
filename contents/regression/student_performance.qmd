@@ -1,0 +1,19 @@
+## Student Performance
+
+Webpage: <https://archive.ics.uci.edu/dataset/320/student+performance>
+
+```{r}
+student_performance <- fetch_ucirepo(id = 320)
+student_performance_data <- student_performance$data$original
+
+dim(student_performance_data)
+head(student_performance_data)
+```
+
+
+- **Number of features:** 30
+- **Number of targets:** 3
+- **Number of observations:** 649 
+- **Response variable:** official targets are `G1`, `G2`, and `G3`; for regression, `G3` is the usual choice
+- **Topic:** student achievement in secondary education
+

@@ -1,0 +1,18 @@
+## Abalone
+
+Webpage: <https://archive.ics.uci.edu/dataset/1/abalone>
+
+```{r}
+abalone <- fetch_ucirepo(id = 1)
+abalone_data <- abalone$data$original
+
+dim(abalone_data)
+head(abalone_data)
+```
+
+- **Number of features:** 8
+- **Number of targets:** 1
+- **Number of observations:** 4,177
+- **Response variable:** `Rings`
+- **Topic:** predicting abalone age from physical measurements
+

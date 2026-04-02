@@ -1,0 +1,18 @@
+## Energy Efficiency
+
+Webpage: <https://archive.ics.uci.edu/dataset/242/energy+efficiency>
+
+```{r}
+energy_efficiency <- fetch_ucirepo(id = 242)
+energy_efficiency_data <- energy_efficiency$data$original
+
+dim(energy_efficiency_data)
+head(energy_efficiency_data)
+```
+
+- **Number of features:** 8
+- **Number of targets:** 2
+- **Number of observations:** 768
+- **Response variable:** official targets are `Y1` and `Y2`
+- **Topic:** building energy efficiency
+

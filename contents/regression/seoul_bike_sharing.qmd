@@ -1,0 +1,18 @@
+## Seoul Bike Sharing Demand
+
+Webpage: <https://archive.ics.uci.edu/dataset/560/seoul+bike+sharing+demand>
+
+```{r}
+seoul_bike_sharing <- fetch_ucirepo(id = 560)
+seoul_bike_sharing_data <- seoul_bike_sharing$data$original
+
+dim(seoul_bike_sharing_data)
+head(seoul_bike_sharing_data)
+```
+
+- **Number of features:** 13
+- **Number of targets:** 1
+- **Number of observations:** 8,760
+- **Response variable:** `Rented Bike Count`
+- **Topic:** urban bike rental demand with weather and seasonal information
+

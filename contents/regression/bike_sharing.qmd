@@ -1,0 +1,18 @@
+## Bike Sharing
+
+Webpage: <https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset>
+
+```{r}
+bike_sharing <- fetch_ucirepo(id = 275)
+bike_sharing_data <- bike_sharing$data$original
+
+dim(bike_sharing_data)
+head(bike_sharing_data)
+```
+
+- **Number of features:** 13
+- **Number of targets:** 3
+- **Number of observations:** 17,379 for the hourly data
+- **Response variable:** official targets are `casual`, `registered`, and `cnt`; `cnt` is the usual choice
+- **Topic:** bicycle rental demand with weather and seasonal information
+

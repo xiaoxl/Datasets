@@ -1,0 +1,20 @@
+## Appliances Energy Prediction
+
+Webpage: <https://archive.ics.uci.edu/dataset/374/appliances+energy+prediction>
+
+```{r}
+appliances_energy <- fetch_ucirepo(id = 374)
+appliances_energy_data <- appliances_energy$data$original
+
+dim(appliances_energy_data)
+head(appliances_energy_data)
+```
+
+- **Number of features:** 28
+- **Number of targets:** 1
+- **Number of observations:** 19,735
+- **Response variable:** `Appliances`
+- **Topic:** household energy use prediction
+
+# Datasets that need a little preprocessing
+

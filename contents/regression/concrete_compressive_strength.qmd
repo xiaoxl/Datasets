@@ -1,0 +1,18 @@
+## Concrete Compressive Strength
+
+Webpage: <https://archive.ics.uci.edu/dataset/165/concrete+compressive+strength>
+
+```{r}
+concrete_strength <- fetch_ucirepo(id = 165)
+concrete_strength_data <- concrete_strength$data$original
+
+dim(concrete_strength_data)
+head(concrete_strength_data)
+```
+
+- **Number of features:** 8
+- **Number of targets:** 1
+- **Number of observations:** 1,030
+- **Response variable:** `Concrete compressive strength`
+- **Topic:** civil engineering and material strength
+
