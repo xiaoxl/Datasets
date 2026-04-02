@@ -57,6 +57,7 @@ book:
         - contents/regression/air_quality.qmd
         - contents/regression/communities_and_crime_unnormalized.qmd
         - contents/regression/real_estate_valuation.qmd
+        - contents/regression/possum.qmd
     - part: Classification
       chapters:
         - contents/classification/adult.qmd

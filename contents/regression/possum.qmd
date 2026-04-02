@@ -1,0 +1,18 @@
+# `possum` 
+
+The dataset `possum` originates from the `DAAG` package, created to support the book *Data Analysis and Graphics Using R* @DAAG-package. The underlying data were collected in @Lindenmayer1995, with the scientific aim of quantifying morphological variation among geographically distinct populations of the mountain brushtail possum. The dataset `possum` contains nine morphometric measurements on each of 104 possums trapped across seven Australian sites spanning southern Victoria to central Queensland. Additional details and variable descriptions are available in the official [DAAG package documentation](https://cran.r-project.org/web/packages/DAAG/refman/DAAG.html#possum).
+
+The package can be installed by the following code.
+
+```{r}
+#| eval: false
+install.packages("DAAG")
+```
+
+The dataset can be loaded by the following code.
+```{r}
+#| warning: false
+library(DAAG)
+data(possum)
+head(possum)
+```
