@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Xinli Xiao">
-<meta name="dcterms.date" content="2026-04-01">
 
-<title>Datasets Collection</title>
+<title>titanic dataset – Datasets Collection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,52 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./contents/regression/QSR.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-76bd60113cab0e4045c5a075e28c35eb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bd72660a7ac1d74eb59e6013565e57c7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-76bd60113cab0e4045c5a075e28c35eb.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-98d67fd4a94d75c92ed86be1e8f4ff03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/bookup_fonts_gwf-0.0/fonts-embed.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../contents/no_targets/ds4psy.html" rel="next">
+<link href="../../contents/classification/random.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-76bd60113cab0e4045c5a075e28c35eb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bd72660a7ac1d74eb59e6013565e57c7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-76bd60113cab0e4045c5a075e28c35eb.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-98d67fd4a94d75c92ed86be1e8f4ff03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/bookup_fonts_gwf-0.0/fonts-embed.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -97,7 +112,7 @@ div.csl-indent {
 }</script>
 
 
-<link rel="stylesheet" href="blocks.css">
+<link rel="stylesheet" href="../../blocks.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -272,7 +287,7 @@ div.csl-indent {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Datasets Collection</h1>
+          <h1 class="quarto-secondary-nav-title"><span class="chapter-title"><code>titanic</code> dataset</span></h1>
         </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -286,7 +301,7 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Datasets Collection <br> Spring 2026</a> 
+      <a href="../../">Datasets Collection <br> Spring 2026</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -306,7 +321,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -321,168 +336,168 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/QSR.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">QSR</span></a>
+  <a href="../../contents/regression/QSR.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">QSR</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/student_performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Student Performance</span></a>
+  <a href="../../contents/regression/student_performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Student Performance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/bike_sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bike Sharing</span></a>
+  <a href="../../contents/regression/bike_sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bike Sharing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/auto_mpg.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Auto MPG</span></a>
+  <a href="../../contents/regression/auto_mpg.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Auto MPG</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/wine_quality.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Wine Quality</span></a>
+  <a href="../../contents/regression/wine_quality.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Wine Quality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/heart_disease.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Heart Disease</span></a>
+  <a href="../../contents/regression/heart_disease.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Heart Disease</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/forest_fires.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Forest Fires</span></a>
+  <a href="../../contents/regression/forest_fires.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Forest Fires</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/energy_efficiency.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Energy Efficiency</span></a>
+  <a href="../../contents/regression/energy_efficiency.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Energy Efficiency</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/airfoil_self_noise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Airfoil Self-Noise</span></a>
+  <a href="../../contents/regression/airfoil_self_noise.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Airfoil Self-Noise</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/parkinsons_telemonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Parkinsons Telemonitoring</span></a>
+  <a href="../../contents/regression/parkinsons_telemonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Parkinsons Telemonitoring</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/abalone.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Abalone</span></a>
+  <a href="../../contents/regression/abalone.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Abalone</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/concrete_compressive_strength.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Concrete Compressive Strength</span></a>
+  <a href="../../contents/regression/concrete_compressive_strength.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Concrete Compressive Strength</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/electrical_grid_stability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Electrical Grid Stability Simulated Data</span></a>
+  <a href="../../contents/regression/electrical_grid_stability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Electrical Grid Stability Simulated Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/seoul_bike_sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seoul Bike Sharing Demand</span></a>
+  <a href="../../contents/regression/seoul_bike_sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Seoul Bike Sharing Demand</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/gas_turbine_emissions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Gas Turbine CO and NOx Emission Data Set</span></a>
+  <a href="../../contents/regression/gas_turbine_emissions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Gas Turbine CO and NOx Emission Data Set</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/superconductivity.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Superconductivity</span></a>
+  <a href="../../contents/regression/superconductivity.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Superconductivity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/appliances_energy_prediction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appliances Energy Prediction</span></a>
+  <a href="../../contents/regression/appliances_energy_prediction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appliances Energy Prediction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/air_quality.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Air Quality</span></a>
+  <a href="../../contents/regression/air_quality.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Air Quality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/communities_and_crime_unnormalized.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communities and Crime Unnormalized</span></a>
+  <a href="../../contents/regression/communities_and_crime_unnormalized.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communities and Crime Unnormalized</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/regression/real_estate_valuation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Real Estate Valuation</span></a>
+  <a href="../../contents/regression/real_estate_valuation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Real Estate Valuation</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Classification</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/adult.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Adult income dataset</span></a>
+  <a href="../../contents/classification/adult.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Adult income dataset</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/breast_cancer.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>breast_cancer</code> dataset</span></a>
+  <a href="../../contents/classification/breast_cancer.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>breast_cancer</code> dataset</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/datingtestset.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dating dataset</span></a>
+  <a href="../../contents/classification/datingtestset.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dating dataset</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/horse_colic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Horse Colic Dataset</span></a>
+  <a href="../../contents/classification/horse_colic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Horse Colic Dataset</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/iris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>iris</code> dataset</span></a>
+  <a href="../../contents/classification/iris.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>iris</code> dataset</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/kagglediabetes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Kaggle Diabetes</span></a>
+  <a href="../../contents/classification/kagglediabetes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Kaggle Diabetes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/littlerockcrime.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Little Rock Crime Dataset</span></a>
+  <a href="../../contents/classification/littlerockcrime.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Little Rock Crime Dataset</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/mnist.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>MNIST</code> dataset</span></a>
+  <a href="../../contents/classification/mnist.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>MNIST</code> dataset</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/plants_survival.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Plant survival data with salt and microbe treatments</span></a>
+  <a href="../../contents/classification/plants_survival.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Plant survival data with salt and microbe treatments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/random.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Randomly generated datasets</span></a>
+  <a href="../../contents/classification/random.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Randomly generated datasets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/classification/titanic.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>titanic</code> dataset</span></a>
+  <a href="../../contents/classification/titanic.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title"><code>titanic</code> dataset</span></a>
   </div>
 </li>
       </ul>
@@ -498,12 +513,12 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/no_targets/ds4psy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datasets in <code>ds4psy</code></span></a>
+  <a href="../../contents/no_targets/ds4psy.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datasets in <code>ds4psy</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents/no_targets/faker.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>Faker</code></span></a>
+  <a href="../../contents/no_targets/faker.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>Faker</code></span></a>
   </div>
 </li>
       </ul>
@@ -513,14 +528,8 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -528,26 +537,14 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Datasets Collection</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title"><code>titanic</code> dataset</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Xinli Xiao </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">April 1, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -557,14 +554,47 @@ div.csl-indent {
 </header>
 
 
-<section id="references" class="level1 unnumbered">
-<h1 class="unnumbered">References</h1>
-<div id="refs" role="list" style="display: none">
-
+<p>This is the famuous Kaggle101 dataset. The original data can be download from <a href="https://www.kaggle.com/competitions/titanic/data">the Kaggle page</a>. You may also download the <a href="../assests/datasets/titanic/train.csv">training set</a> and the <a href="../assests/datasets/titanic/test.csv">test data</a> by click the link.</p>
+<div id="95c7b447" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dftrain <span class="op">=</span> pd.read_csv(<span class="st">'train.csv'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>dftest <span class="op">=</span> pd.read_csv(<span class="st">'test.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The original is a little bit messy with missing values and mix of numeric data and string data. The above code reads the data into a DataFrame. The following code does some basic of preprocess. This part should be modified if you want to improve the performance of your model.</p>
+<ol type="1">
+<li>Only select columns: <code>Pclass</code>, <code>Sex</code>, <code>Age</code>, <code>SibSp</code>, <code>Parch</code>, <code>Fare</code>. That is to say, <code>Name</code>, <code>Cabin</code> and <code>Embarked</code> are dropped.</li>
+<li>Fill the missing values in column <code>Age</code> and <code>Fare</code> by <code>0</code>.</li>
+<li>Replace the column <code>Sex</code> by the following map: <code>{'male': 0, 'female': 1}</code>.</li>
+</ol>
+<div id="711189ea" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getnp(df):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'mapSex'</span>] <span class="op">=</span> df[<span class="st">'Sex'</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: {<span class="st">'male'</span>: <span class="dv">0</span>, <span class="st">'female'</span>: <span class="dv">1</span>}[x])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    dfx <span class="op">=</span> df[[<span class="st">'Pclass'</span>, <span class="st">'mapSex'</span>, <span class="st">'Age'</span>, <span class="st">'SibSp'</span>, <span class="st">'Parch'</span>, <span class="st">'Fare'</span>]].copy()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    dfx[<span class="st">'Fare'</span>].fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    dfx[<span class="st">'Age'</span>].fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'Survived'</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> df[<span class="st">'Survived'</span>].to_numpy()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> dfx.to_numpy()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (X, y)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> getnp(dftrain)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>X_test, _ <span class="op">=</span> getnp(dftest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For the purpose of submitting to Kaggle, after getting <code>y_pred</code>, we could use the following file to prepare for the submission file.</p>
+<div id="28b5b434" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getdf(df, y):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Survived'</span>] <span class="op">=</span> y</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df[[<span class="st">'PassengerId'</span>, <span class="st">'Survived'</span>]]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>getdf(dftest, y_pred).to_csv(<span class="st">'result.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -982,10 +1012,13 @@ div.csl-indent {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../contents/classification/random.html" class="pagination-link" aria-label="Randomly generated datasets">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Randomly generated datasets</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./contents/regression/QSR.html" class="pagination-link" aria-label="QSR">
-        <span class="nav-page-text"><span class="chapter-title">QSR</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../contents/no_targets/ds4psy.html" class="pagination-link" aria-label="Datasets in `ds4psy`">
+        <span class="nav-page-text"><span class="chapter-title">Datasets in <code>ds4psy</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
