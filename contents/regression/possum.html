@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Wine Quality – Datasets Collection</title>
+<title>possum – Datasets Collection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -65,8 +84,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../contents/regression/heart_disease.html" rel="next">
-<link href="../../contents/regression/auto_mpg.html" rel="prev">
+<link href="../../contents/classification/adult.html" rel="next">
+<link href="../../contents/regression/real_estate_valuation.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -287,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Wine Quality</span></h1>
+          <h1 class="quarto-secondary-nav-title"><span class="chapter-title"><code>possum</code></span></h1>
         </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -356,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../contents/regression/wine_quality.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Wine Quality</span></a>
+  <a href="../../contents/regression/wine_quality.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Wine Quality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -436,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../contents/regression/possum.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><code>possum</code></span></a>
+  <a href="../../contents/regression/possum.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title"><code>possum</code></span></a>
   </div>
 </li>
       </ul>
@@ -542,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Wine Quality</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title"><code>possum</code></span></h1>
 </div>
 
 
@@ -559,23 +578,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Webpage: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
+<p>The dataset <code>possum</code> originates from the <code>DAAG</code> package, created to support the book <em>Data Analysis and Graphics Using R</em> <span class="citation" data-cites="DAAG-package">[<a href="../../index.html#ref-DAAG-package" role="doc-biblioref">1</a>]</span>. The underlying data were collected in <span class="citation" data-cites="Lindenmayer1995">[<a href="../../index.html#ref-Lindenmayer1995" role="doc-biblioref">2</a>]</span>, with the scientific aim of quantifying morphological variation among geographically distinct populations of the mountain brushtail possum. The dataset <code>possum</code> contains nine morphometric measurements on each of 104 possums trapped across seven Australian sites spanning southern Victoria to central Queensland. Additional details and variable descriptions are available in the official <a href="https://cran.r-project.org/web/packages/DAAG/refman/DAAG.html#possum">DAAG package documentation</a>.</p>
+<p>The package can be installed by the following code.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>wine_quality <span class="ot">&lt;-</span> <span class="fu">fetch_ucirepo</span>(<span class="at">id =</span> <span class="dv">186</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>wine_quality_data <span class="ot">&lt;-</span> wine_quality<span class="sc">$</span>data<span class="sc">$</span>original</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(wine_quality_data)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wine_quality_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"DAAG"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<ul>
-<li><strong>Number of features:</strong> 12</li>
-<li><strong>Number of targets:</strong> 1</li>
-<li><strong>Number of observations:</strong> 6,497 combined across red and white wine data.</li>
-<li><strong>Response variable:</strong> <code>quality</code></li>
-<li><strong>Topic:</strong> predicting wine quality from physicochemical measurements</li>
-</ul>
+<p>The dataset can be loaded by the following code.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DAAG)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(possum)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(possum)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
+<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-DAAG-package" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span class="smallcaps">Maindonald</span>, J. H. and <span class="smallcaps">Braun</span>, W. J. (2011). <em>Data analysis and graphics using r. An example-based approach.</em> Cambridge University Press, Cambridge.</div>
+</div>
+<div id="ref-Lindenmayer1995" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span class="smallcaps">Lindenmayer</span>, D., <span class="smallcaps">Viggers</span>, K., <span class="smallcaps">Cunningham</span>, R. and <span class="smallcaps">Donnelly</span>, C. (1995). <a href="https://doi.org/10.1071/zo9950449">Morphological variation among populations of the mountain brushtail possum, trichosurus-caninus ogilby (phalangeridae, marsupialia)</a>. <em>Australian Journal of Zoology</em> <strong>43</strong> 449–58.</div>
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -993,13 +1016,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../contents/regression/auto_mpg.html" class="pagination-link" aria-label="Auto MPG">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Auto MPG</span></span>
+      <a href="../../contents/regression/real_estate_valuation.html" class="pagination-link" aria-label="Real Estate Valuation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Real Estate Valuation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../contents/regression/heart_disease.html" class="pagination-link" aria-label="Heart Disease">
-        <span class="nav-page-text"><span class="chapter-title">Heart Disease</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../contents/classification/adult.html" class="pagination-link" aria-label="Adult income dataset">
+        <span class="nav-page-text"><span class="chapter-title">Adult income dataset</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
